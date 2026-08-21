@@ -3564,3 +3564,52 @@
         gap: 8px;
     }
 }
+/* =========================================================
+   CART DROPDOWN (MOBILE VIEW)
+========================================================= */
+
+/* For smaller tablets and large phones */
+@media (max-width: 576px) {
+    .cart-dropdown-menu {
+        width: 300px;
+        right: -10px; /* Pulls it slightly to avoid overflowing the left screen edge */
+    }
+}
+
+/* For small phones */
+@media (max-width: 400px) {
+    .cart-dropdown-menu {
+        width: 280px;
+        right: -15px; 
+    }
+    
+    /* Shrink the product image slightly */
+    .cart-item-img {
+        width: 50px;
+        height: 50px;
+        margin-right: 12px;
+    }
+
+    /* Reduce padding to save screen space */
+    .cart-header, 
+    .cart-footer {
+        padding: 12px 15px;
+    }
+    
+    .cart-items-wrapper {
+        padding: 5px 15px;
+    }
+
+    /* Adjust font sizes for smaller screens */
+    .cart-title {
+        font-size: 14px;
+    }
+    
+    .cart-item-name {
+        font-size: 12px;
+    }
+    
+    .cart-item-price {
+        font-size: 12px;
+    }
+}

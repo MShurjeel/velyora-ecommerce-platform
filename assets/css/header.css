@@ -148,6 +148,7 @@
     box-shadow: none;
 }
 
+
 /* =========================================================
    CART COUNT
 ========================================================= */
@@ -472,4 +473,201 @@
         padding: 0 18px;
         font-size: 14px;
     }
+}
+
+/* =========================================================
+   CART DROPDOWN MENU (Mini-Cart)
+========================================================= */
+.cart-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cart-dropdown-toggle {
+    border: 0;
+    outline: none;
+    background: transparent;
+}
+
+/* The Mini-Cart Container */
+.cart-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0; 
+    width: 340px; /* Slightly wider than account menu to fit products */
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    display: none; /* Handled by JS toggle */
+    z-index: 9999;
+    padding: 0; /* Padding is applied to inner sections */
+    cursor: default;
+}
+
+/* Show menu when active class is applied */
+.cart-dropdown.active .cart-dropdown-menu {
+    display: block;
+}
+
+/* Header Section */
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.cart-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--color-text, #333);
+}
+
+.cart-item-count {
+    font-size: 12px;
+    background: #f4f4f4;
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: #666;
+}
+
+/* Items List Section */
+.cart-items-wrapper {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 10px 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px dashed #eaeaea;
+    position: relative;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    margin-right: 15px;
+}
+
+.cart-item-details {
+    flex: 1;
+    padding-right: 15px;
+}
+
+.cart-item-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: var(--color-text, #333);
+    line-height: 1.3;
+}
+
+.cart-item-variant {
+    display: block;
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+.cart-item-price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cart-item-price {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text, #333);
+}
+
+.cart-item-qty {
+    font-size: 11px;
+    color: #888;
+}
+
+/* Remove 'x' button */
+.cart-item-remove {
+    background: transparent;
+    border: none;
+    color: #ccc;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.cart-item-remove:hover {
+    color: #ff4d4f;
+}
+
+/* Footer Section */
+.cart-footer {
+    padding: 16px 20px;
+    border-top: 1px solid #eaeaea;
+    background-color: #fcfcfc;
+    border-radius: 0 0 8px 8px;
+}
+
+.cart-subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.subtotal-label {
+    font-size: 14px;
+    color: #666;
+}
+
+.subtotal-amount {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text, #333);
+}
+
+.btn-checkout {
+    display: block;
+    width: 100%;
+    background-color: var(--color-primary, #2563EB);
+    color: #fff;
+    text-align: center;
+    padding: 12px 0;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: background-color 0.2s;
+}
+
+.btn-checkout:hover {
+    background-color: var(--color-dark, #1E3A8A);
+    color: #fff;
+}
+
+.btn-view-cart {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: var(--color-primary, #2563EB);
+    text-decoration: none;
+}
+
+.btn-view-cart:hover {
+    text-decoration: underline;
 }

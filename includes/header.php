@@ -82,11 +82,68 @@
                 </a>
 
                 <!-- Cart -->
-                <a href="cart.php" class="header-action cart-action">
-                    <i class="bi bi-bag"></i>
-                    <span>Cart</span>
-                    <span class="cart-count">0</span>
-                </a>
+                <div class="cart-dropdown">
+                    <!-- The Cart Toggle Button -->
+                    <button type="button" class="header-action cart-dropdown-toggle">
+                        <i class="bi bi-bag"></i>
+                        <span>Cart</span>
+                        <span class="cart-count">3</span>
+                    </button>
+
+                    <!-- The Mini-Cart Menu (Matches image_67eec9.jpg) -->
+                    <div class="cart-dropdown-menu">
+
+                        <!-- Cart Header -->
+                        <div class="cart-header">
+                            <span class="cart-title">Shopping Cart</span>
+                            <span class="cart-item-count">3 items</span>
+                        </div>
+
+                        <!-- Cart Items List -->
+                        <div class="cart-items-wrapper">
+
+                            <!-- Item 1 -->
+                            <div class="cart-item">
+                                <img src="assets/images/product-1.jpg" alt="Leather Bag" class="cart-item-img">
+                                <div class="cart-item-details">
+                                    <h6 class="cart-item-name">Leather Crossbody Bag</h6>
+                                    <span class="cart-item-variant">Tan / One Size</span>
+                                    <div class="cart-item-price-row">
+                                        <span class="cart-item-price">$124.00</span>
+                                        <span class="cart-item-qty">Qty: 1</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="cart-item-remove"><i class="bi bi-x"></i></button>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="cart-item">
+                                <img src="assets/images/product-2.jpg" alt="T-Shirt" class="cart-item-img">
+                                <div class="cart-item-details">
+                                    <h6 class="cart-item-name">Cotton Blend T-Shirt</h6>
+                                    <span class="cart-item-variant">White / M</span>
+                                    <div class="cart-item-price-row">
+                                        <span class="cart-item-price">$29.00</span>
+                                        <span class="cart-item-qty">Qty: 2</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="cart-item-remove"><i class="bi bi-x"></i></button>
+                            </div>
+
+                        </div>
+
+                        <!-- Cart Footer / Summary -->
+                        <div class="cart-footer">
+                            <div class="cart-subtotal">
+                                <span class="subtotal-label">Subtotal</span>
+                                <span class="subtotal-amount">$153.00</span>
+                            </div>
+                            <a href="checkout.php" class="btn-checkout">Checkout</a>
+                            <a href="cart.php" class="btn-view-cart">View full cart &rarr;</a>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
             <!-- Mobile Menu -->
@@ -97,4 +154,36 @@
     </div>
 </header>
 
+
 <?php include("includes/navbar.php"); ?>
+
+<?php include("includes/navbar.php"); ?>
+
+<!-- Wrap your JavaScript in script tags -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cartToggle = document.querySelector('.cart-dropdown-toggle');
+    const cartDropdown = document.querySelector('.cart-dropdown');
+
+    if (cartToggle && cartDropdown) {
+        // Toggle the menu when clicking the cart button
+        cartToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Prevents the click from instantly closing it
+            cartDropdown.classList.toggle('active');
+        });
+
+        // Close the menu if you click outside of it
+        document.addEventListener('click', function(e) {
+            if (!cartDropdown.contains(e.target)) {
+                cartDropdown.classList.remove('active');
+            }
+        });
+        
+        // Prevent clicking inside the menu from closing it
+        cartDropdown.querySelector('.cart-dropdown-menu').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+});
+</script>
