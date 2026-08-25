@@ -72,15 +72,11 @@
                         </div>
 
                         <div class="account-dropdown-links">
-                            <a href="my-orders.php">
-                                <i class="bi bi-box"></i>
-                                <span>My Orders</span>
+                            <a href="my-profile.php">
+                                <i class="bi bi-person-circle"></i>
+                                <span>My Profile</span>
                             </a>
-                            <a href="#">
-                                <i class="bi bi-arrow-return-left"></i>
-                                <span>Returns &amp; Refunds</span>
-                            </a>
-                            <a href="#">
+                            <a href="help-center.php">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Help Center</span>
                             </a>
