@@ -1,0 +1,177 @@
+:root {
+    /* =========================================================
+       1. CORE BRAND COLORS
+       Change these to update the overall theme of the website.
+    ========================================================= */
+    --color-deep-navy: #0A1020;    /* Darkest color, used for Sidebar & main headings */
+    --color-navy: #0D1B3D;         /* Secondary dark tone for gradients */
+    --color-royal-blue: #1E3A8A;   /* Darker primary tone for button hovers */
+    --color-primary: #2563EB;      /* MAIN THEME COLOR - used for active links, buttons, highlights */
+    --color-sky: #38BDF8;          /* Bright accent for icons and charts */
+    --color-light-blue: #93C5FD;   /* Soft accent for backgrounds */
+    --color-white: #FFFFFF;        /* Base white */
+    --color-transparent: transparent; /* Utility variable */
+    
+    /* =========================================================
+       2. SEMANTIC ADMIN BACKGROUNDS
+       Controls the large structural areas of the dashboard.
+    ========================================================= */
+    --color-bg-main: #F6F9FD;      /* The main light-gray/blue page background */
+    --color-bg-card: var(--color-white); /* Background for individual white widgets/tables */
+    --color-bg-sidebar: var(--color-deep-navy); /* Sidebar background color */
+    --color-bg-header: var(--color-white); /* Top navbar background color */
+    --color-bg-hover: #F1F5F9;     /* Soft gray used when hovering over menu items/rows */
+
+    /* =========================================================
+       3. TEXT COLORS
+       Typography hierarchy system.
+    ========================================================= */
+    --color-text-main: #0A1020;    /* Darkest text for important headings (h1-h6, strong) */
+    --color-text-muted: #64748B;   /* Lighter gray for paragraphs, table headers, subtitles */
+    --color-text-sidebar: #94A3B8; /* Muted text specifically for unselected sidebar links */
+    --color-text-inverse: var(--color-white); /* White text used on dark backgrounds or buttons */
+    
+    /* =========================================================
+       4. BORDERS & DIVIDERS
+    ========================================================= */
+    --color-border: #E2E8F0;       /* Standard light gray border around cards and inputs */
+    --color-border-inverse: rgba(255, 255, 255, 0.05); /* Faint line used in the dark sidebar */
+
+    /* =========================================================
+       5. STATUS & BADGES (SOLID)
+       Used for text, icons, and solid notification dots.
+    ========================================================= */
+    --color-success: #16A34A;      /* Green for Completed/Positive */
+    --color-warning: #F59E0B;      /* Yellow/Orange for Pending/Alerts */
+    --color-danger: #DC2626;       /* Red for Cancelled/Errors */
+    
+    /* =========================================================
+       6. STATUS & BADGES (SOFT BACKGROUNDS)
+       Pairs with the solid colors above for modern tinted badges.
+    ========================================================= */
+    --color-success-soft: #DCFCE7; /* Light green tint */
+    --color-warning-soft: #FEF3C7; /* Light yellow tint */
+    --color-danger-soft: #FEE2E2;  /* Light red tint */
+    --color-sky-soft: #E0F2FE;     /* Light blue tint */
+    --color-primary-soft: #EFF6FF; /* Light primary color tint */
+
+    /* =========================================================
+       7. TRANSLUCENT OVERLAYS (IMPORTANT FOR THEME CHANGES)
+       Note for AI/Dev: If --color-primary (#2563EB) is changed, 
+       update the RGB values below (37, 99, 235) to match the new color 
+       so shadows and glows generate correctly.
+    ========================================================= */
+    --color-primary-alpha-10: rgba(37, 99, 235, 0.1); /* Subtle colored hover background */
+    --color-primary-alpha-20: rgba(37, 99, 235, 0.2); /* Soft shadow for the hero banner */
+    --color-primary-alpha-40: rgba(37, 99, 235, 0.4); /* Glowing shadow for active sidebar links */
+    
+    /* Neutral alphas for shadows and dark UI elements */
+    --color-white-alpha-05: rgba(255, 255, 255, 0.05); 
+    --color-white-alpha-10: rgba(255, 255, 255, 0.1);
+    --color-white-alpha-15: rgba(255, 255, 255, 0.15);
+    --color-white-alpha-20: rgba(255, 255, 255, 0.2);
+    --color-black-alpha-02: rgba(0, 0, 0, 0.02);
+    --color-black-alpha-03: rgba(10, 16, 32, 0.03);   /* Base drop shadow opacity */
+    --color-black-alpha-06: rgba(0, 0, 0, 0.06);      /* Stronger shadow opacity */
+
+    /* =========================================================
+       8. UI FOUNDATIONS
+       Layout scaling, spacing, and master shadow system.
+    ========================================================= */
+    --font-family: "Inter", sans-serif; /* Global font */
+    --radius-pill: 50px;           /* Fully rounded corners (search bar, active links) */
+    --radius-card: 16px;           /* Soft rounded corners for dashboard widgets */
+    --radius-sm: 8px;              /* Small rounded corners for buttons and inputs */
+    
+    /* Master Shadow System referencing the alphas above */
+    --shadow-sm: 0 4px 15px var(--color-black-alpha-03);   /* Default shadow for white cards */
+    --shadow-btn: 0 2px 6px var(--color-black-alpha-06);   /* Snappy shadow for buttons */
+    --shadow-glow: 0 4px 15px var(--color-primary-alpha-40); /* Colored glow for active items */
+    --shadow-hero: 0 10px 25px var(--color-primary-alpha-20); /* Deep shadow for the hero banner */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-family); background: var(--color-bg-main); color: var(--color-text-muted); font-size: 14px; }
+a { text-decoration: none; color: inherit; }
+h1, h2, h3, h4, h5, h6, strong { color: var(--color-text-main); }
+
+/* Utility Classes */
+.d-none { display: none; }
+.d-desktop { display: grid; }
+.d-mobile { display: none; }
+.font-bold { font-weight: 600; }
+.text-primary { color: var(--color-primary) !important; }
+.status-badge { padding: 5px 12px; border-radius: var(--radius-pill); font-size: 11px; font-weight: 700; display: inline-block; }
+.status-badge.success { background: var(--color-success-soft); color: var(--color-success); }
+.status-badge.warning { background: var(--color-warning-soft); color: var(--color-warning); }
+.status-badge.danger { background: var(--color-danger-soft); color: var(--color-danger); }
+
+/* =========================================================
+   GLOBAL LAYOUT SHELL
+========================================================= */
+.trendy-layout { display: flex; height: 100vh; overflow: hidden; }
+.trendy-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+.trendy-sidebar { width: 260px; background: var(--color-bg-sidebar); color: var(--color-text-sidebar); display: flex; flex-direction: column; flex-shrink: 0; transition: all 0.3s ease; }
+.sidebar-header { height: 70px; display: flex; align-items: center; padding: 0 24px; justify-content: space-between; }
+.sidebar-logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700; color: var(--color-text-inverse); letter-spacing: -0.5px; }
+.logo-icon { background: var(--color-primary); width: 32px; height: 32px; display: grid; place-items: center; border-radius: var(--radius-sm); font-size: 16px; color: var(--color-text-inverse); }
+.mobile-close-btn { background: var(--color-transparent); border: none; color: var(--color-text-inverse); font-size: 22px; cursor: pointer; }
+
+.sidebar-scroll { flex: 1; overflow-y: auto; padding: 20px 15px; }
+.sidebar-scroll::-webkit-scrollbar { width: 5px; }
+.sidebar-scroll::-webkit-scrollbar-thumb { background: var(--color-white-alpha-10); border-radius: 10px; }
+
+.sidebar-section { margin-bottom: 25px; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 1px; margin-bottom: 12px; padding-left: 15px; display: block; color: var(--color-text-muted); }
+
+.sidebar-link { display: flex; align-items: center; padding: 10px 15px; color: var(--color-text-sidebar); border-radius: var(--radius-pill); margin-bottom: 5px; font-size: 13.5px; font-weight: 500; transition: 0.2s; cursor: pointer; }
+.sidebar-link i:first-child { font-size: 18px; margin-right: 12px; }
+.ms-auto { margin-left: auto; font-size: 12px !important; }
+.sidebar-link:hover { color: var(--color-text-inverse); background: var(--color-white-alpha-05); }
+.sidebar-link.active { background: var(--color-primary); color: var(--color-text-inverse); box-shadow: var(--shadow-glow); }
+
+.badge-count { margin-left: auto; background: var(--color-danger); color: var(--color-text-inverse); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
+
+/* Sidebar Submenu */
+.sidebar-submenu { display: none; flex-direction: column; padding-left: 40px; margin-bottom: 5px; }
+.sidebar-submenu a { color: var(--color-text-muted); padding: 8px 15px; font-size: 12.5px; font-weight: 500; border-radius: var(--radius-pill); transition: 0.2s; margin-bottom: 2px; }
+.sidebar-submenu a:hover, .sidebar-submenu a.active { color: var(--color-text-inverse); background: var(--color-white-alpha-05); }
+.sidebar-link .arrow { transition: transform 0.3s ease; font-size: 11px !important; }
+.sidebar-link.open .arrow { transform: rotate(90deg); }
+.sidebar-link.open + .sidebar-submenu { display: flex; }
+
+.sidebar-footer { padding: 20px; border-top: 1px solid var(--color-border-inverse); display: flex; align-items: center; gap: 12px; }
+.user-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+.user-info strong { display: block; font-size: 13px; color: var(--color-text-inverse); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px; }
+.user-info span { font-size: 11px; }
+.logout-icon { margin-left: auto; font-size: 18px; cursor: pointer; transition: 0.2s; }
+.logout-icon:hover { color: var(--color-text-inverse); }
+
+/* =========================================================
+   TOP HEADER
+========================================================= */
+.trendy-header { height: 70px; background: var(--color-bg-header); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; border-bottom: 1px solid var(--color-border); }
+.header-left, .header-right { display: flex; align-items: center; gap: 15px; }
+
+.icon-btn-flat { background: var(--color-transparent); border: none; font-size: 20px; color: var(--color-text-muted); cursor: pointer; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; transition: 0.2s; }
+.icon-btn-flat:hover { background: var(--color-bg-hover); color: var(--color-primary); }
+
+.search-bar-pill { display: flex; align-items: center; background: var(--color-bg-hover); padding: 0 15px; border-radius: var(--radius-pill); width: 320px; height: 42px; border: 1px solid var(--color-transparent); transition: 0.2s; }
+.search-bar-pill:focus-within { border-color: var(--color-primary); background: var(--color-bg-card); box-shadow: 0 0 0 3px var(--color-primary-alpha-10); }
+.search-bar-pill i { color: var(--color-text-muted); margin-right: 10px; font-size: 16px; }
+.search-bar-pill input { border: none; background: var(--color-transparent); outline: none; flex: 1; font-size: 13px; color: var(--color-text-main); }
+.shortcut { background: var(--color-bg-card); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; color: var(--color-text-muted); border: 1px solid var(--color-border); }
+
+.btn-create-pill { background: var(--color-primary); color: var(--color-text-inverse); border: none; padding: 0 20px; height: 40px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.2s; }
+.btn-create-pill:hover { background: var(--color-royal-blue); }
+
+.badge-btn { position: relative; }
+.badge-dot { position: absolute; top: 4px; right: 4px; background: var(--color-danger); color: var(--color-text-inverse); font-size: 9px; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: grid; place-items: center; border: 2px solid var(--color-bg-header); }
+
+.header-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; border-left: 1px solid var(--color-border); padding-left: 15px; margin-left: 5px; }
+.header-profile img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+.header-profile span { font-size: 13px; font-weight: 600; color: var(--color-text-main); display: flex; align-items: center; gap: 5px; }
