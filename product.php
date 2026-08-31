@@ -1,211 +1,99 @@
 <?php
 $pageTitle = "Product Details — Velyora";
 
-/*
-|--------------------------------------------------------------------------
-| VELYORA PRODUCT DETAIL
-|--------------------------------------------------------------------------
-| Temporary presentation data.
-|
-| This follows the same temporary product-data approach currently used
-| by products.php. It can later be replaced by a database query without
-| changing the page structure.
-|--------------------------------------------------------------------------
-*/
+// 1. Connect to Database
+require_once 'config/db.php';
 
+// 2. Get Product ID from URL
 $productId = isset($_GET['id']) ? (int) $_GET['id'] : 1;
 
-/*
-|--------------------------------------------------------------------------
-| PRODUCT DATA
-|--------------------------------------------------------------------------
-*/
-$products = [
-    1 => [
-        'id' => 1,
-        'name' => 'Premium Wireless Headphones',
-        'category' => 'Electronics',
-        'category_slug' => 'electronics',
-        'price' => 8999,
-        'old_price' => 11999,
-        'rating' => 4.9,
-        'reviews' => 124,
-        'badge' => 'BEST SELLER',
-        'badge_type' => 'primary',
-        'image' => 'assets/images/products/product-1.png',
-        'short_description' => 'Experience rich, immersive sound with a premium wireless design built for everyday listening, work and travel.',
-        'stock' => 18,
-        'sku' => 'VEL-ELEC-001',
-        'brand' => 'Velyora',
-        'colors' => [
-            [
-                'name' => 'Midnight',
-                'value' => '#0A1020'
-            ],
-            [
-                'name' => 'Cloud',
-                'value' => '#F1F5F9'
-            ],
-            [
-                'name' => 'Royal Blue',
-                'value' => '#1E3A8A'
-            ],
-            [
-                'name' => 'Forest',
-                'value' => '#276749'
-            ]
-        ],
-        'features' => [
-            [
-                'icon' => 'bi-soundwave',
-                'title' => 'Immersive Sound',
-                'text' => 'Balanced audio with detailed highs and rich bass.'
-            ],
-            [
-                'icon' => 'bi-battery-charging',
-                'title' => 'Long Battery',
-                'text' => 'Designed for extended listening throughout the day.'
-            ],
-            [
-                'icon' => 'bi-bluetooth',
-                'title' => 'Seamless Pairing',
-                'text' => 'Quick and reliable wireless connectivity.'
-            ],
-            [
-                'icon' => 'bi-headphones',
-                'title' => 'Comfort First',
-                'text' => 'Soft cushioning designed for longer sessions.'
-            ]
-        ],
-        'included' => [
-            'Premium Wireless Headphones',
-            'Protective Carrying Case',
-            'USB-C Charging Cable',
-            '3.5mm Audio Cable',
-            'Quick Start Guide',
-            'Warranty Documentation'
-        ],
-        'specifications' => [
-            'Audio' => [
-                'Driver Size' => '40mm Dynamic',
-                'Frequency Range' => '20Hz – 20kHz',
-                'Connectivity' => 'Bluetooth 5.3',
-                'Audio Format' => 'High Resolution Audio',
-                'Noise Control' => 'Active Noise Cancellation'
-            ],
-            'Battery & Power' => [
-                'Battery Type' => 'Lithium-Ion',
-                'Battery Life' => 'Up to 35 hours',
-                'Charging' => 'USB-C',
-                'Fast Charge' => '10 minutes = up to 4 hours',
-                'Charge Time' => 'Approximately 2 hours'
-            ],
-            'Design' => [
-                'Weight' => '285g',
-                'Material' => 'Premium Composite',
-                'Cushion Material' => 'Memory Foam',
-                'Foldable' => 'Yes',
-                'Water Resistance' => 'IPX4'
-            ],
-            'Smart Features' => [
-                'Microphone' => 'Dual Array',
-                'Voice Assistant' => 'Supported',
-                'Touch Controls' => 'Yes',
-                'Multipoint' => 'Supported',
-                'App Support' => 'Velyora Audio'
-            ]
-        ],
-        'reviews_data' => [
-            [
-                'name' => 'Ayesha Khan',
-                'rating' => 5,
-                'date' => 'August 10, 2026',
-                'title' => 'Excellent sound and comfort',
-                'text' => 'The sound quality is excellent and the headphones stay comfortable even after several hours of use.'
-            ],
-            [
-                'name' => 'Hassan Ali',
-                'rating' => 5,
-                'date' => 'July 28, 2026',
-                'title' => 'Great everyday headphones',
-                'text' => 'Battery life is impressive and pairing was very easy. The overall build feels much more premium than expected.'
-            ],
-            [
-                'name' => 'Sara Ahmed',
-                'rating' => 4,
-                'date' => 'July 14, 2026',
-                'title' => 'Very good value',
-                'text' => 'Comfortable, stylish and reliable. The noise cancellation is especially useful when travelling.'
-            ]
-        ]
-    ]
-];
+// 3. Fetch Main Product
+$stmt = $pdo->prepare("
+    SELECT products.*, categories.name AS category, categories.slug AS category_slug 
+    FROM products 
+    JOIN categories ON products.category_id = categories.id 
+    WHERE products.id = :id AND products.status = 'active'
+");
+$stmt->execute([':id' => $productId]);
+$product = $stmt->fetch();
 
-/*
-|--------------------------------------------------------------------------
-| FALLBACK
-|--------------------------------------------------------------------------
-*/
-if (!isset($products[$productId])) {
+// Redirect to catalog if product doesn't exist
+if (!$product) {
     header('Location: products.php');
     exit;
 }
 
-$product = $products[$productId];
+// 4. Format Pricing and Badges to match your existing HTML
+if (!empty($product['sale_price'])) {
+    $product['old_price'] = $product['price'];
+    $product['price'] = $product['sale_price']; // Current active price
+    $discount = round((($product['old_price'] - $product['price']) / $product['old_price']) * 100);
+    $product['badge'] = $discount . '% OFF';
+    $product['badge_type'] = 'sale';
+} else {
+    $product['old_price'] = null;
+    $product['badge'] = ($product['is_featured'] == 1) ? 'BEST SELLER' : '';
+    $product['badge_type'] = 'primary';
+}
 
-/*
-|--------------------------------------------------------------------------
-| RELATED PRODUCTS
-|--------------------------------------------------------------------------
-| These currently match the products used by products.php.
-|--------------------------------------------------------------------------
-*/
-$relatedProducts = [
-    [
-        'id' => 2,
-        'name' => 'Premium Everyday Hoodie',
-        'category' => 'Fashion',
-        'price' => 3499,
-        'old_price' => 4399,
-        'rating' => 4.8,
-        'reviews' => 89,
-        'badge' => '20% OFF',
-        'image' => 'assets/images/products/product-2.png'
-    ],
-    [
-        'id' => 3,
-        'name' => 'Urban Everyday Backpack',
-        'category' => 'Accessories',
-        'price' => 5999,
-        'old_price' => null,
-        'rating' => 4.7,
-        'reviews' => 61,
-        'badge' => 'NEW',
-        'image' => 'assets/images/products/product-3.png'
-    ],
-    [
-        'id' => 4,
-        'name' => 'Modern Lifestyle Essential',
-        'category' => 'Home & Living',
-        'price' => 2799,
-        'old_price' => null,
-        'rating' => 4.6,
-        'reviews' => 47,
-        'badge' => 'TRENDING',
-        'image' => 'assets/images/products/product-4.png'
-    ],
-    [
-        'id' => 7,
-        'name' => 'Smart Tech Essential',
-        'category' => 'Electronics',
-        'price' => 6499,
-        'old_price' => null,
-        'rating' => 4.9,
-        'reviews' => 73,
-        'badge' => 'POPULAR',
-        'image' => 'assets/images/products/product-7.png'
-    ]
+// Map database columns to HTML variables
+$product['short_description'] = $product['description'];
+$product['stock'] = $product['stock_qty'];
+$product['sku'] = 'VEL-' . strtoupper(substr($product['category_slug'], 0, 4)) . '-' . str_pad($product['id'], 3, '0', STR_PAD_LEFT);
+$product['brand'] = 'Velyora';
+$product['rating'] = 4.8; // Static until review system is built
+$product['reviews'] = 124; // Static until review system is built
+
+// 5. Preserve Complex UI Data (Static for now)
+// To make these dynamic later, you will need separate tables for colors, specs, and features.
+$product['colors'] = [
+    ['name' => 'Midnight', 'value' => '#0A1020'],
+    ['name' => 'Cloud', 'value' => '#F1F5F9']
 ];
+$product['features'] = [
+    ['icon' => 'bi-star', 'title' => 'Velyora Quality', 'text' => 'Built to last with premium materials.']
+];
+$product['included'] = [$product['name'], 'Quick Start Guide', 'Warranty Documentation'];
+$product['specifications'] = [
+    'General' => ['Category' => $product['category'], 'Status' => 'In Stock']
+];
+$product['reviews_data'] = [
+    ['name' => 'Verified Buyer', 'rating' => 5, 'date' => 'August 2026', 'title' => 'Excellent purchase', 'text' => 'Highly recommended!']
+];
+
+// 6. Fetch Dynamic Related Products (Same Category)
+$relStmt = $pdo->prepare("
+    SELECT products.*, categories.name AS category 
+    FROM products 
+    JOIN categories ON products.category_id = categories.id 
+    WHERE products.category_id = :category_id 
+    AND products.id != :current_id 
+    AND products.status = 'active' 
+    LIMIT 4
+");
+$relStmt->execute([
+    ':category_id' => $product['category_id'],
+    ':current_id' => $product['id']
+]);
+$relatedDbProducts = $relStmt->fetchAll();
+
+// Format related products for your HTML
+$relatedProducts = [];
+foreach ($relatedDbProducts as $rel) {
+    $formattedRel = $rel;
+    if (!empty($rel['sale_price'])) {
+        $formattedRel['old_price'] = $rel['price'];
+        $formattedRel['price'] = $rel['sale_price'];
+        $discount = round((($formattedRel['old_price'] - $formattedRel['price']) / $formattedRel['old_price']) * 100);
+        $formattedRel['badge'] = $discount . '% OFF';
+    } else {
+        $formattedRel['old_price'] = null;
+        $formattedRel['badge'] = ($rel['is_featured'] == 1) ? 'POPULAR' : '';
+    }
+    $formattedRel['rating'] = 4.7; 
+    $formattedRel['reviews'] = 89; 
+    $relatedProducts[] = $formattedRel;
+}
 ?>
 
 <?php include 'includes/header.php'; ?>
