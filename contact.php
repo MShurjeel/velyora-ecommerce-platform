@@ -20,6 +20,9 @@ $pageTitle = "Contact Us — Velyora";
 
 <main>
 
+    <!-- =========================================================
+         HERO SECTION
+    ========================================================= -->
     <section class="contact-hero">
         <div class="container">
             <div class="contact-hero-content">
@@ -41,11 +44,15 @@ $pageTitle = "Contact Us — Velyora";
         </div>
     </section>
 
+    <!-- =========================================================
+         MAIN SECTION 1: CONTACT HUB (INFO & FORM)
+    ========================================================= -->
     <section class="contact-section">
         <div class="container">
 
             <div class="contact-grid">
 
+                <!-- Left: Blue Info Card -->
                 <aside class="contact-information">
 
                     <div class="contact-info-top">
@@ -66,7 +73,6 @@ $pageTitle = "Contact Us — Velyora";
                             <span class="contact-info-icon">
                                 <i class="bi bi-geo-alt"></i>
                             </span>
-
                             <div>
                                 <span>Visit Us</span>
                                 <strong>123 Fashion Street</strong>
@@ -78,7 +84,6 @@ $pageTitle = "Contact Us — Velyora";
                             <span class="contact-info-icon">
                                 <i class="bi bi-telephone"></i>
                             </span>
-
                             <div>
                                 <span>Call Us</span>
                                 <strong>+1 (555) 123-4567</strong>
@@ -90,7 +95,6 @@ $pageTitle = "Contact Us — Velyora";
                             <span class="contact-info-icon">
                                 <i class="bi bi-envelope"></i>
                             </span>
-
                             <div>
                                 <span>Email Us</span>
                                 <strong>hello@velyora.com</strong>
@@ -102,7 +106,6 @@ $pageTitle = "Contact Us — Velyora";
                             <span class="contact-info-icon">
                                 <i class="bi bi-clock"></i>
                             </span>
-
                             <div>
                                 <span>Working Hours</span>
                                 <strong>Monday–Friday</strong>
@@ -116,30 +119,17 @@ $pageTitle = "Contact Us — Velyora";
                         <span>FOLLOW VELYORA</span>
 
                         <div>
-                            <a href="#" aria-label="Facebook">
-                                <i class="bi bi-facebook"></i>
-                            </a>
-
-                            <a href="#" aria-label="Instagram">
-                                <i class="bi bi-instagram"></i>
-                            </a>
-
-                            <a href="#" aria-label="Twitter">
-                                <i class="bi bi-twitter-x"></i>
-                            </a>
-
-                            <a href="#" aria-label="TikTok">
-                                <i class="bi bi-tiktok"></i>
-                            </a>
-
-                            <a href="#" aria-label="Pinterest">
-                                <i class="bi bi-pinterest"></i>
-                            </a>
+                            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                            <a href="#" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
                         </div>
                     </div>
 
                 </aside>
 
+                <!-- Right: Form Card -->
                 <div class="contact-form-card">
 
                     <div class="contact-form-heading">
@@ -154,101 +144,56 @@ $pageTitle = "Contact Us — Velyora";
                     <form class="contact-form">
 
                         <div class="contact-form-row">
-
                             <div class="contact-field">
                                 <label for="contact-name">Your Name</label>
-
                                 <div class="contact-input">
                                     <i class="bi bi-person"></i>
-
-                                    <input
-                                        type="text"
-                                        id="contact-name"
-                                        name="name"
-                                        placeholder="Enter your name"
-                                        required>
+                                    <input type="text" id="contact-name" name="name" placeholder="Enter your name" required>
                                 </div>
                             </div>
-
                             <div class="contact-field">
                                 <label for="contact-email">Email Address</label>
-
                                 <div class="contact-input">
                                     <i class="bi bi-envelope"></i>
-
-                                    <input
-                                        type="email"
-                                        id="contact-email"
-                                        name="email"
-                                        placeholder="you@example.com"
-                                        required>
+                                    <input type="email" id="contact-email" name="email" placeholder="you@example.com" required>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="contact-form-row">
-
                             <div class="contact-field">
                                 <label for="contact-phone">Phone Number</label>
-
                                 <div class="contact-input">
                                     <i class="bi bi-telephone"></i>
-
-                                    <input
-                                        type="tel"
-                                        id="contact-phone"
-                                        name="phone"
-                                        placeholder="+92 300 1234567">
+                                    <input type="tel" id="contact-phone" name="phone" placeholder="+92 300 1234567">
                                 </div>
                             </div>
-
                             <div class="contact-field">
                                 <label for="contact-subject">Subject</label>
-
                                 <div class="contact-input">
                                     <i class="bi bi-chat-left-text"></i>
-
-                                    <input
-                                        type="text"
-                                        id="contact-subject"
-                                        name="subject"
-                                        placeholder="How can we help?">
+                                    <input type="text" id="contact-subject" name="subject" placeholder="How can we help?">
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="contact-field">
                             <label for="contact-message">Your Message</label>
-
                             <div class="contact-input contact-textarea">
                                 <i class="bi bi-pencil"></i>
-
-                                <textarea
-                                    id="contact-message"
-                                    name="message"
-                                    rows="7"
-                                    placeholder="Tell us how we can help..."
-                                    required></textarea>
+                                <textarea id="contact-message" name="message" rows="7" placeholder="Tell us how we can help..." required></textarea>
                             </div>
                         </div>
 
                         <div class="contact-form-footer">
-
                             <div class="contact-form-note">
                                 <i class="bi bi-shield-check"></i>
-
-                                <span>
-                                    Your information is safe with us.
-                                </span>
+                                <span>Your information is safe with us.</span>
                             </div>
-
                             <button type="submit" class="contact-submit">
                                 Send Message
                                 <i class="bi bi-arrow-right"></i>
                             </button>
-
                         </div>
 
                     </form>
@@ -260,117 +205,68 @@ $pageTitle = "Contact Us — Velyora";
         </div>
     </section>
 
-    <section class="contact-support">
-        <div class="container">
-
-            <div class="contact-support-heading">
-                <span class="contact-eyebrow">WHY VELYORA</span>
-                <h2>Support You Can Count On.</h2>
-                <p>
-                    From your first question to your final delivery,
-                    we're committed to making your experience simple.
-                </p>
-            </div>
-
-            <div class="contact-support-grid">
-
-                <article class="contact-support-card">
-                    <span>
-                        <i class="bi bi-lightning-charge"></i>
-                    </span>
-
-                    <div>
-                        <h3>Quick Response</h3>
-                        <p>
-                            Our team aims to respond to every message
-                            within one business day.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="contact-support-card">
-                    <span>
-                        <i class="bi bi-headset"></i>
-                    </span>
-
-                    <div>
-                        <h3>Personal Support</h3>
-                        <p>
-                            Get helpful answers from a real member
-                            of the Velyora support team.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="contact-support-card">
-                    <span>
-                        <i class="bi bi-shield-check"></i>
-                    </span>
-
-                    <div>
-                        <h3>Secure & Private</h3>
-                        <p>
-                            Your contact information is handled
-                            securely and responsibly.
-                        </p>
-                    </div>
-                </article>
-
-            </div>
-
-        </div>
-    </section>
-
-    <section class="contact-location">
+    <!-- =========================================================
+         MAIN SECTION 2: MAP & TRUST FEATURES (MERGED)
+    ========================================================= -->
+    <section class="contact-location" style="padding-top: 0;">
         <div class="container">
 
             <div class="contact-location-card">
 
+                <!-- Left: Trust Features (Replaces redundant address text) -->
                 <div class="contact-location-content">
 
-                    <span class="contact-eyebrow">FIND US</span>
+                    <span class="contact-eyebrow">WHY VELYORA</span>
 
-                    <h2>Visit Our Location.</h2>
+                    <h2>Support You Can Count On.</h2>
 
                     <p>
-                        We're based in the heart of New York and
-                        always happy to hear from our customers.
+                        From your first question to your final delivery,
+                        we're committed to making your experience simple and secure.
                     </p>
 
-                    <div class="contact-location-details">
+                    <!-- Reusing location-details CSS to beautifully format the 3 features -->
+                    <div class="contact-location-details" style="margin-top: 20px;">
 
                         <div>
-                            <i class="bi bi-geo-alt"></i>
-
+                            <i class="bi bi-lightning-charge"></i>
                             <span>
-                                123 Fashion Street<br>
-                                New York, NY 10001
+                                <strong style="display:block; color:var(--color-heading); font-size:13px; margin-bottom:2px;">Quick Response</strong>
+                                Our team aims to respond within one business day.
                             </span>
                         </div>
 
                         <div>
-                            <i class="bi bi-clock"></i>
-
+                            <i class="bi bi-headset"></i>
                             <span>
-                                Monday–Friday: 9:00 AM – 6:00 PM<br>
-                                Saturday: 10:00 AM – 4:00 PM
+                                <strong style="display:block; color:var(--color-heading); font-size:13px; margin-bottom:2px;">Personal Support</strong>
+                                Get helpful answers from a real team member.
+                            </span>
+                        </div>
+
+                        <div>
+                            <i class="bi bi-shield-check"></i>
+                            <span>
+                                <strong style="display:block; color:var(--color-heading); font-size:13px; margin-bottom:2px;">Secure & Private</strong>
+                                Your contact information is handled securely.
                             </span>
                         </div>
 
                     </div>
 
                     <a href="#" class="contact-directions">
-                        Get Directions
+                        Get Directions to our Store
                         <i class="bi bi-arrow-up-right"></i>
                     </a>
 
                 </div>
 
+                <!-- Right: The Map -->
                 <div class="contact-map">
                     <div class="contact-map-placeholder">
                         <i class="bi bi-geo-alt-fill"></i>
 
-                        <strong>Velyora</strong>
+                        <strong>Velyora Flagship</strong>
 
                         <span>
                             123 Fashion Street, New York
@@ -391,9 +287,6 @@ $pageTitle = "Contact Us — Velyora";
 </main>
 
 <?php include 'includes/footer.php'; ?>
-
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/main.js"></script>
 
 </body>
 </html>
