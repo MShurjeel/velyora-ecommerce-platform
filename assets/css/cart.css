@@ -290,7 +290,7 @@
     align-items: center;
     gap: 7px;
     padding: 10px 15px;
-    border: 1px solid rgba(220, 38, 38, .25);
+    border: 1px solid var(--color-danger-soft);
     border-radius: var(--radius-sm);
     background: transparent;
     color: var(--color-danger);
@@ -301,7 +301,7 @@
 }
 
 .cart-clear-button:hover {
-    background: #FEF2F2;
+    background: var(--color-danger-soft);
 }
 
 .cart-summary {
@@ -324,9 +324,9 @@
     height: 42px;
     display: grid;
     place-items: center;
-    border: 1px solid rgba(255,255,255,.2);
+    border: 1px solid var(--color-white-alpha-10);
     border-radius: 12px;
-    background: rgba(255,255,255,.1);
+    background: var(--color-white-alpha-10);
     font-size: 19px;
 }
 
@@ -347,7 +347,7 @@
 .shipping-progress {
     margin: 22px 22px 0;
     padding: 15px;
-    border: 1px solid #DBEAFE;
+    border: 1px solid var(--color-border-blue);
     border-radius: var(--radius-md);
     background: var(--color-background-blue);
 }
@@ -377,7 +377,7 @@
     margin: 11px 0 8px;
     overflow: hidden;
     border-radius: 999px;
-    background: #DBEAFE;
+    background: var(--color-border-blue);
 }
 
 .shipping-progress-bar span {
@@ -540,7 +540,7 @@
     color: var(--color-white);
     font-size: 13px;
     font-weight: 800;
-    box-shadow: 0 8px 20px rgba(37,99,235,.2);
+    box-shadow: var(--shadow-primary-btn);
     transition: var(--transition);
 }
 
@@ -602,7 +602,7 @@
 }
 
 .payment-methods i {
-    color: #94A3B8;
+    color: var(--color-text-muted);
     font-size: 19px;
 }
 

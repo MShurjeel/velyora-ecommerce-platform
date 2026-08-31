@@ -3,7 +3,7 @@
 ========================================================= */
 
 .contact-hero {
-    background: linear-gradient(135deg, #F8FBFF 0%, #EFF6FF 55%, #FFFFFF 100%);
+    background: linear-gradient(135deg, var(--color-background-ultrasoft) 0%, var(--color-background-blue) 55%, var(--color-white) 100%);
     border-bottom: 1px solid var(--color-border);
     padding: 46px 0;
 }
@@ -58,7 +58,7 @@
 }
 
 .contact-breadcrumb i {
-    color: #94A3B8;
+    color: var(--color-text-muted);
     font-size: 10px;
 }
 
@@ -90,7 +90,7 @@
     min-height: 690px;
     padding: 42px;
     border-radius: var(--radius-lg);
-    background: linear-gradient(145deg, var(--color-primary) 0%, #1D4ED8 58%, #1E40AF 100%);
+    background: linear-gradient(145deg, var(--color-primary) 0%, var(--color-primary-hover) 58%, var(--color-primary-active) 100%);
     color: var(--color-white);
     box-shadow: var(--shadow-lg);
 }
@@ -102,7 +102,7 @@
     height: 260px;
     right: -120px;
     top: -120px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border: 1px solid var(--color-white-alpha-10);
     border-radius: 50%;
 }
 
@@ -113,13 +113,13 @@
     height: 190px;
     right: -75px;
     top: -75px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--color-white-alpha-10);
     border-radius: 50%;
 }
 
 .contact-card-eyebrow {
     display: inline-block;
-    color: #BFDBFE;
+    color: var(--color-light-blue);
     font-size: 10px;
     font-weight: 800;
     letter-spacing: 1.5px;
@@ -174,7 +174,7 @@
     place-items: center;
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.12);
+    background: var(--color-white-alpha-10);
     color: var(--color-white);
     font-size: 17px;
 }
@@ -186,7 +186,7 @@
 }
 
 .contact-info-item div > span {
-    color: #BFDBFE;
+    color: var(--color-light-blue);
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -221,7 +221,7 @@
 .contact-social > span {
     display: block;
     margin-bottom: 13px;
-    color: #BFDBFE;
+    color: var(--color-light-blue);
     font-size: 10px;
     font-weight: 800;
     letter-spacing: 1px;
@@ -240,7 +240,7 @@
     place-items: center;
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 9px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--color-white-alpha-08);
     color: var(--color-white);
     font-size: 14px;
     transition: var(--transition);
@@ -330,7 +330,7 @@
     left: 15px;
     top: 50%;
     z-index: 1;
-    color: #94A3B8;
+    color: var(--color-text-muted);
     font-size: 14px;
     transform: translateY(-50%);
     pointer-events: none;
@@ -364,12 +364,12 @@
 
 .contact-input input::placeholder,
 .contact-input textarea::placeholder {
-    color: #A8B2C0;
+    color: var(--color-text-muted);
 }
 
 .contact-input input:hover,
 .contact-input textarea:hover {
-    border-color: #CBD5E1;
+    border-color: var(--color-border);
     background: var(--color-white);
 }
 
@@ -377,7 +377,7 @@
 .contact-input textarea:focus {
     border-color: var(--color-primary);
     background: var(--color-white);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.09);
+    box-shadow: 0 0 0 3px var(--color-primary-alpha-08);
 }
 
 .contact-input input:focus + i,
@@ -435,7 +435,7 @@
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+    box-shadow: var(--shadow-primary-btn);
     transition: var(--transition);
 }
 
@@ -443,7 +443,7 @@
     background: var(--color-royal-blue);
     color: var(--color-white);
     transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.25);
+    box-shadow: 0 12px 25px var(--color-primary-alpha-25);
 }
 
 .contact-submit i {
@@ -505,7 +505,7 @@
 }
 
 .contact-support-card:hover {
-    border-color: #BFDBFE;
+    border-color: var(--color-light-blue);
     box-shadow: var(--shadow-sm);
     transform: translateY(-3px);
 }
@@ -657,7 +657,7 @@
 .contact-map::after {
     content: "";
     position: absolute;
-    background: rgba(37, 99, 235, 0.08);
+    background: var(--color-primary-alpha-08);
     transform: rotate(-18deg);
 }
 
@@ -704,7 +704,7 @@
     background: var(--color-primary);
     color: var(--color-white);
     font-size: 20px;
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+    box-shadow: var(--shadow-primary-btn);
 }
 
 .contact-map-placeholder strong {

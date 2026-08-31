@@ -2,7 +2,7 @@
    LOGIN PAGE
 ========================================================= */
 .page-header {
-    background: #eef4fa;
+    background: var(--color-background-soft);
     padding: 28px 0;
 }
 
@@ -15,7 +15,7 @@
 
 .page-header h1 {
     margin: 0;
-    color: #111827;
+    color: var(--color-heading);
     font-size: 32px;
     font-weight: 700;
 }
@@ -25,22 +25,22 @@
     align-items: center;
     gap: 14px;
     margin: 0;
-    color: #4b5563;
+    color: var(--color-text);
     font-size: 15px;
 }
 
 .breadcrumb a {
-    color: #0866c6;
+    color: var(--color-primary);
     text-decoration: none;
 }
 
 .breadcrumb span:first-of-type {
-    color: #9ca3af;
+    color: var(--color-text-muted);
 }
 
 .login-page {
     padding: 70px 0 90px;
-    background: var(--color-bg);
+    background: var(--color-background);
 }
 
 .login-wrapper {
@@ -77,7 +77,7 @@
 
 .login-intro h1 {
     margin: 0;
-    color: var(--color-text);
+    color: var(--color-heading);
     font-size: 48px;
     font-weight: 800;
     line-height: 1.08;
@@ -116,9 +116,9 @@
     width: 46px;
     height: 46px;
     flex: 0 0 46px;
-    border: 1px solid rgba(37, 99, 235, 0.12);
+    border: 1px solid var(--color-primary-alpha-12);
     border-radius: 12px;
-    background: rgba(37, 99, 235, 0.07);
+    background: var(--color-primary-alpha-08);
     color: var(--color-primary);
     font-size: 18px;
 }
@@ -130,7 +130,7 @@
 }
 
 .login-benefit strong {
-    color: var(--color-text);
+    color: var(--color-heading);
     font-size: 13px;
     font-weight: 700;
 }
@@ -184,7 +184,7 @@
 
 .login-card-header h2 {
     margin: 0;
-    color: var(--color-text);
+    color: var(--color-heading);
     font-size: 27px;
     font-weight: 750;
     line-height: 1.2;
@@ -210,7 +210,7 @@
 }
 
 .login-field label {
-    color: var(--color-text);
+    color: var(--color-heading);
     font-size: 11px;
     font-weight: 650;
 }
@@ -256,7 +256,7 @@
     border-radius: var(--radius-sm);
     outline: none;
     background: var(--color-white);
-    color: var(--color-text);
+    color: var(--color-heading);
     font-family: inherit;
     font-size: 12px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -268,12 +268,12 @@
 }
 
 .login-input input:hover {
-    border-color: var(--color-primary-light);
+    border-color: var(--color-light-blue);
 }
 
 .login-input input:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px var(--color-primary-alpha-12);
 }
 
 .login-password-toggle {
@@ -295,7 +295,7 @@
 }
 
 .login-password-toggle:hover {
-    background: var(--color-bg);
+    background: var(--color-background);
     color: var(--color-primary);
 }
 
@@ -338,8 +338,8 @@
 }
 
 .login-submit:hover {
-    background: var(--color-primary-dark);
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+    background: var(--color-primary-hover);
+    box-shadow: 0 8px 20px var(--color-primary-alpha-20);
 }
 
 .login-submit:active {
@@ -399,8 +399,8 @@
 }
 
 .login-socials button:hover {
-    border-color: var(--color-primary-light);
-    background: var(--color-bg);
+    border-color: var(--color-light-blue);
+    background: var(--color-background);
     color: var(--color-primary);
 }
 

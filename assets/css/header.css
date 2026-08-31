@@ -24,7 +24,7 @@
 .announcement-divider {
     width: 1px;
     height: 14px;
-    background: rgba(255, 255, 255, 0.25);
+    background: var(--color-white-alpha-25);
 }
 
 /* =========================================================
@@ -41,13 +41,11 @@
     gap: 30px;
 }
 
-/* Logo */
 .brand-logo img {
     width: 150px;
     height: auto;
 }
 
-/* Search */
 .header-search {
     flex: 1;
     max-width: 550px;
@@ -67,6 +65,7 @@
     background: transparent;
     padding: 0 20px;
     font-size: 14px;
+    color: var(--color-text);
 }
 .header-search button {
     width: 50px;
@@ -77,10 +76,7 @@
 }
 
 /* =========================================================
-   HEADER ACTIONS (Account / Wishlist / Cart wrapper)
-   NOTE: position:relative moved here so the account dropdown
-   menu aligns to the far right of the whole cluster, not just
-   the narrow Account button — matches reference screenshot.
+   HEADER ACTIONS
 ========================================================= */
 .header-actions {
     position: relative;
@@ -90,8 +86,6 @@
     margin-left: auto;
 }
 
-/* Shared base style for Account / Wishlist / Cart — all three
-   MUST look identical (size, icon size, color, spacing). */
 .header-action {
     position: relative;
     display: flex;
@@ -127,9 +121,7 @@
 }
 
 /* =========================================================
-   ACCOUNT BUTTON
-   Only dropdown-specific behaviour lives here — no font/color
-   resets. It inherits everything visual from .header-action.
+   ACCOUNT BUTTON & DROPDOWN
 ========================================================= */
 .account-dropdown {
     display: flex;
@@ -148,9 +140,107 @@
     box-shadow: none;
 }
 
+.account-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 14px);
+    right: calc(-1 * max(20px, (100vw - var(--container-width, 1200px)) / 2));
+    width: 280px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 9999;
+    overflow: hidden;
+    display: none;
+}
+.account-dropdown.active .account-dropdown-menu {
+    display: block;
+}
+
+.account-dropdown-header {
+    padding: 18px 20px 12px;
+}
+.account-dropdown-header h3 {
+    margin: 0 0 5px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-heading);
+}
+.account-dropdown-header p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--color-text-light);
+}
+
+.account-dropdown-actions {
+    display: flex;
+    gap: 8px;
+    padding: 8px 20px 16px;
+}
+.account-dropdown-actions a {
+    flex: 1;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+.account-signin {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+.account-signin:hover {
+    background: var(--color-primary-hover);
+    color: var(--color-white);
+}
+.account-register {
+    background: var(--color-white);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+.account-register:hover {
+    background: var(--color-background-blue);
+    color: var(--color-primary);
+}
+
+.account-dropdown-links {
+    border-top: 1px solid var(--color-border);
+    padding: 6px 0;
+}
+.account-dropdown-links a {
+    min-height: 54px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 14px;
+    transition: var(--transition);
+}
+.account-dropdown-links a:hover {
+    background: var(--color-background-hover);
+    color: var(--color-primary);
+}
+.account-dropdown-links i {
+    width: 22px;
+    min-width: 22px;
+    font-size: 18px;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+.account-dropdown-links a:hover i {
+    color: var(--color-primary);
+}
 
 /* =========================================================
-   CART COUNT
+   CART COUNT & MINI CART
 ========================================================= */
 .cart-action {
     position: relative;
@@ -171,124 +261,169 @@
     line-height: 1;
 }
 
-/* =========================================================
-   ACCOUNT DROPDOWN MENU
-   Positioned relative to .header-actions (not .account-dropdown)
-   so it lines up flush with the right edge of the whole
-   Account/Wishlist/Cart cluster — same as the reference.
-========================================================= */
-.account-dropdown-menu {
-    position: absolute;
-    top: calc(100% + 14px);
-    /* Push past the container's own right gap so the menu lands
-       flush with the actual browser window edge, not just the
-       container's inner edge (matches reference). */
-    right: calc(-1 * max(20px, (100vw - var(--container-width, 1200px)) / 2));
-    width: 280px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.12);
-    z-index: 9999;
-    overflow: hidden;
-    display: none;
+.cart-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
-.account-dropdown.active .account-dropdown-menu {
+.cart-dropdown-toggle {
+    border: 0;
+    outline: none;
+    background: transparent;
+}
+.cart-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0; 
+    width: 340px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    display: none;
+    z-index: 9999;
+    padding: 0;
+    cursor: default;
+}
+.cart-dropdown.active .cart-dropdown-menu {
     display: block;
 }
 
-.account-dropdown-header {
-    padding: 18px 20px 12px;
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border);
 }
-.account-dropdown-header h3 {
-    margin: 0 0 5px;
-    font-size: 20px;
+.cart-title {
     font-weight: 700;
-    line-height: 1.2;
-    color: #0f172a;
+    font-size: 15px;
+    color: var(--color-heading);
 }
-.account-dropdown-header p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #64748b;
+.cart-item-count {
+    font-size: 12px;
+    background: var(--color-background-hover);
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: var(--color-text-light);
 }
 
-.account-dropdown-actions {
-    display: flex;
-    gap: 8px;
-    padding: 8px 20px 16px;
+.cart-items-wrapper {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 10px 20px;
 }
-.account-dropdown-actions a {
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px dashed var(--color-border);
+    position: relative;
+}
+.cart-item:last-child {
+    border-bottom: none;
+}
+.cart-item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    background-color: var(--color-background-soft);
+    margin-right: 15px;
+}
+.cart-item-details {
     flex: 1;
-    min-height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    font-size: 14px;
+    padding-right: 15px;
+}
+.cart-item-name {
+    font-size: 13px;
     font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s ease;
+    margin: 0 0 4px 0;
+    color: var(--color-heading);
+    line-height: 1.3;
 }
-.account-signin {
-    background: #2563eb;
-    color: #ffffff;
+.cart-item-variant {
+    display: block;
+    font-size: 11px;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
 }
-.account-signin:hover {
-    background: #1d4ed8;
-    color: #ffffff;
-}
-.account-register {
-    background: #ffffff;
-    color: #2563eb;
-    border: 1px solid #2563eb;
-}
-.account-register:hover {
-    background: #eff6ff;
-    color: #2563eb;
-}
-
-.account-dropdown-links {
-    border-top: 1px solid #e5e7eb;
-    padding: 6px 0;
-}
-.account-dropdown-links a {
-    min-height: 54px;
-    padding: 0 20px;
+.cart-item-price-row {
     display: flex;
     align-items: center;
-    gap: 14px;
-    color: #475569;
-    text-decoration: none;
-    font-size: 14px;
-    transition: background 0.2s ease, color 0.2s ease;
+    gap: 8px;
 }
-.account-dropdown-links a:hover {
-    background: #f8fafc;
-    color: #2563eb;
+.cart-item-price {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-heading);
 }
-.account-dropdown-links i {
-    width: 22px;
-    min-width: 22px;
+.cart-item-qty {
+    font-size: 11px;
+    color: var(--color-text-muted);
+}
+.cart-item-remove {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
     font-size: 18px;
-    color: #94a3b8;
-    text-align: center;
+    cursor: pointer;
+    padding: 0;
+    transition: var(--transition);
 }
-.account-dropdown-links a:hover i {
-    color: #2563eb;
+.cart-item-remove:hover {
+    color: var(--color-danger);
 }
 
-/* =========================================================
-   MOBILE MENU BUTTON
-========================================================= */
-.mobile-menu-button {
-    display: none;
-    border: 0;
-    background: transparent;
-    color: var(--color-text);
-    font-size: 24px;
-    cursor: pointer;
+.cart-footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-background-hover);
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+.cart-subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.subtotal-label {
+    font-size: 14px;
+    color: var(--color-text-light);
+}
+.subtotal-amount {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-heading);
+}
+.btn-checkout {
+    display: block;
+    width: 100%;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    padding: 12px 0;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: var(--transition);
+}
+.btn-checkout:hover {
+    background-color: var(--color-primary-active);
+    color: var(--color-white);
+}
+.btn-view-cart {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+.btn-view-cart:hover {
+    text-decoration: underline;
 }
 
 /* =========================================================
@@ -318,356 +453,57 @@
 /* =========================================================
    RESPONSIVE
 ========================================================= */
-@media (max-width: 992px) {
-    .main-navbar {
-        gap: 20px;
-    }
-    .header-search {
-        max-width: 450px;
-    }
-    .header-actions {
-        gap: 16px;
-    }
-    /* width stays 280px — no override here anymore */
-}
-
-@media (max-width: 768px) {
-    .announcement-bar {
-        font-size: 12px;
-    }
-    .announcement-content {
-        min-height: 36px;
-        gap: 12px;
-    }
-    .main-navbar {
-        min-height: 70px;
-        gap: 14px;
-    }
-    .brand-logo img {
-        width: 120px;
-    }
-    .header-search {
-        flex: 1;
-        max-width: none;
-    }
-    .header-search form {
-        height: 42px;
-    }
-    .header-search input {
-        padding: 0 14px;
-        font-size: 13px;
-    }
-    .header-search button {
-        width: 44px;
-    }
-    .header-actions {
-        gap: 12px;
-    }
-    .header-action {
-        min-width: 40px;
-    }
-    .header-action i {
-        font-size: 19px;
-    }
-    .header-action span {
-        display: none;
-    }
-
-    .account-dropdown-menu {
-        position: fixed;
-        top: 112px;
-        right: 12px;
-        left: auto;
-        width: 320px;
-        max-width: calc(100vw - 24px);
-        border-radius: 14px;
-    }
-    .account-dropdown-header {
-        padding: 22px 22px 14px;
-    }
-    .account-dropdown-header h3 {
-        font-size: 22px;
-    }
-    .account-dropdown-header p {
-        font-size: 14px;
-    }
-    .account-dropdown-actions {
-        gap: 10px;
-        padding: 6px 22px 22px;
-    }
-    .account-dropdown-actions a {
-        min-height: 48px;
-        font-size: 14px;
-    }
-    .account-dropdown-links {
-        padding: 6px 0;
-    }
-    .account-dropdown-links a {
-        min-height: 58px;
-        padding: 0 22px;
-        gap: 16px;
-        font-size: 15px;
-    }
-    .account-dropdown-links i {
-        width: 24px;
-        min-width: 24px;
-        font-size: 20px;
-    }
-
-    .category-navigation {
-        gap: 20px;
-        overflow-x: auto;
-        justify-content: flex-start;
-        padding: 0 15px;
-        white-space: nowrap;
-    }
-}
-
-@media (max-width: 480px) {
-    .announcement-content {
-        gap: 8px;
-    }
-    .announcement-divider {
-        height: 12px;
-    }
-    .brand-logo img {
-        width: 105px;
-    }
-    .header-search input {
-        font-size: 12px;
-    }
-    .header-actions {
-        gap: 8px;
-    }
-    .header-action {
-        min-width: 34px;
-    }
-    .header-action i {
-        font-size: 18px;
-    }
-
-    .account-dropdown-menu {
-        top: 104px;
-        right: 10px;
-        width: calc(100vw - 20px);
-        max-width: none;
-    }
-    .account-dropdown-header {
-        padding: 20px 18px 12px;
-    }
-    .account-dropdown-header h3 {
-        font-size: 20px;
-    }
-    .account-dropdown-header p {
-        font-size: 13px;
-    }
-    .account-dropdown-actions {
-        padding: 6px 18px 18px;
-    }
-    .account-dropdown-actions a {
-        min-height: 46px;
-        font-size: 13px;
-    }
-    .account-dropdown-links a {
-        min-height: 54px;
-        padding: 0 18px;
-        font-size: 14px;
-    }
-}
-
-/* =========================================================
-   CART DROPDOWN MENU (Mini-Cart)
-========================================================= */
-.cart-dropdown {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.cart-dropdown-toggle {
+.mobile-menu-button {
+    display: none;
     border: 0;
-    outline: none;
     background: transparent;
-}
-
-/* The Mini-Cart Container */
-.cart-dropdown-menu {
-    position: absolute;
-    top: calc(100% + 12px);
-    right: 0; 
-    width: 340px; /* Slightly wider than account menu to fit products */
-    background-color: #ffffff;
-    border: 1px solid #eaeaea;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    display: none; /* Handled by JS toggle */
-    z-index: 9999;
-    padding: 0; /* Padding is applied to inner sections */
-    cursor: default;
-}
-
-/* Show menu when active class is applied */
-.cart-dropdown.active .cart-dropdown-menu {
-    display: block;
-}
-
-/* Header Section */
-.cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 20px;
-    border-bottom: 1px solid #eaeaea;
-}
-
-.cart-title {
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--color-text, #333);
-}
-
-.cart-item-count {
-    font-size: 12px;
-    background: #f4f4f4;
-    padding: 4px 10px;
-    border-radius: 20px;
-    color: #666;
-}
-
-/* Items List Section */
-.cart-items-wrapper {
-    max-height: 320px;
-    overflow-y: auto;
-    padding: 10px 20px;
-}
-
-.cart-item {
-    display: flex;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px dashed #eaeaea;
-    position: relative;
-}
-
-.cart-item:last-child {
-    border-bottom: none;
-}
-
-.cart-item-img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 6px;
-    background-color: #f8f9fa;
-    margin-right: 15px;
-}
-
-.cart-item-details {
-    flex: 1;
-    padding-right: 15px;
-}
-
-.cart-item-name {
-    font-size: 13px;
-    font-weight: 600;
-    margin: 0 0 4px 0;
-    color: var(--color-text, #333);
-    line-height: 1.3;
-}
-
-.cart-item-variant {
-    display: block;
-    font-size: 11px;
-    color: #888;
-    margin-bottom: 6px;
-}
-
-.cart-item-price-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.cart-item-price {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--color-text, #333);
-}
-
-.cart-item-qty {
-    font-size: 11px;
-    color: #888;
-}
-
-/* Remove 'x' button */
-.cart-item-remove {
-    background: transparent;
-    border: none;
-    color: #ccc;
-    font-size: 18px;
+    color: var(--color-text);
+    font-size: 24px;
     cursor: pointer;
-    padding: 0;
-    transition: color 0.2s;
 }
 
-.cart-item-remove:hover {
-    color: #ff4d4f;
+@media (max-width: 992px) {
+    .main-navbar { gap: 20px; }
+    .header-search { max-width: 450px; }
+    .header-actions { gap: 16px; }
 }
-
-/* Footer Section */
-.cart-footer {
-    padding: 16px 20px;
-    border-top: 1px solid #eaeaea;
-    background-color: #fcfcfc;
-    border-radius: 0 0 8px 8px;
+@media (max-width: 768px) {
+    .announcement-bar { font-size: 12px; }
+    .announcement-content { min-height: 36px; gap: 12px; }
+    .main-navbar { min-height: 70px; gap: 14px; }
+    .brand-logo img { width: 120px; }
+    .header-search { flex: 1; max-width: none; }
+    .header-search form { height: 42px; }
+    .header-search input { padding: 0 14px; font-size: 13px; }
+    .header-search button { width: 44px; }
+    .header-actions { gap: 12px; }
+    .header-action { min-width: 40px; }
+    .header-action i { font-size: 19px; }
+    .header-action span { display: none; }
+    .account-dropdown-menu { position: fixed; top: 112px; right: 12px; left: auto; width: 320px; max-width: calc(100vw - 24px); border-radius: 14px; }
+    .account-dropdown-header { padding: 22px 22px 14px; }
+    .account-dropdown-header h3 { font-size: 22px; }
+    .account-dropdown-header p { font-size: 14px; }
+    .account-dropdown-actions { gap: 10px; padding: 6px 22px 22px; }
+    .account-dropdown-actions a { min-height: 48px; font-size: 14px; }
+    .account-dropdown-links { padding: 6px 0; }
+    .account-dropdown-links a { min-height: 58px; padding: 0 22px; gap: 16px; font-size: 15px; }
+    .account-dropdown-links i { width: 24px; min-width: 24px; font-size: 20px; }
+    .category-navigation { gap: 20px; overflow-x: auto; justify-content: flex-start; padding: 0 15px; white-space: nowrap; }
 }
-
-.cart-subtotal {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-
-.subtotal-label {
-    font-size: 14px;
-    color: #666;
-}
-
-.subtotal-amount {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-text, #333);
-}
-
-.btn-checkout {
-    display: block;
-    width: 100%;
-    background-color: var(--color-primary, #2563EB);
-    color: #fff;
-    text-align: center;
-    padding: 12px 0;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-    margin-bottom: 12px;
-    transition: background-color 0.2s;
-}
-
-.btn-checkout:hover {
-    background-color: var(--color-dark, #1E3A8A);
-    color: #fff;
-}
-
-.btn-view-cart {
-    display: block;
-    text-align: center;
-    font-size: 12px;
-    color: var(--color-primary, #2563EB);
-    text-decoration: none;
-}
-
-.btn-view-cart:hover {
-    text-decoration: underline;
+@media (max-width: 480px) {
+    .announcement-content { gap: 8px; }
+    .announcement-divider { height: 12px; }
+    .brand-logo img { width: 105px; }
+    .header-search input { font-size: 12px; }
+    .header-actions { gap: 8px; }
+    .header-action { min-width: 34px; }
+    .header-action i { font-size: 18px; }
+    .account-dropdown-menu { top: 104px; right: 10px; width: calc(100vw - 20px); max-width: none; }
+    .account-dropdown-header { padding: 20px 18px 12px; }
+    .account-dropdown-header h3 { font-size: 20px; }
+    .account-dropdown-header p { font-size: 13px; }
+    .account-dropdown-actions { padding: 6px 18px 18px; }
+    .account-dropdown-actions a { min-height: 46px; font-size: 13px; }
+    .account-dropdown-links a { min-height: 54px; padding: 0 18px; font-size: 14px; }
 }

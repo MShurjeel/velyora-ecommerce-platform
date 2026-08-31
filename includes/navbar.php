@@ -2,31 +2,23 @@
      NAVIGATION
 ========================================================= -->
 
-    <div class="category-navbar">
+<div class="category-navbar">
 
-        <div class="container">
+    <div class="container">
 
-            <nav class="category-navigation">
+        <nav class="category-navigation">
 
-                <a href="products.php">All Products</a>
-
-                <a href="#">Electronics</a>
-
-                <a href="#">Fashion</a>
-
-                <a href="#">Beauty</a>
-
-                <a href="#">Home & Living</a>
-
-                <a href="#">Accessories</a>
-
-                <a href="#">New Arrivals</a>
-
-                <a href="#">Deals</a>
-
-            </nav>
-
-        </div>
+            <a href="products.php">ALL PRODUCTS</a>
+            <a href="#">ELECTRONICS</a>
+            <a href="#">FASHION</a>
+            <a href="#">BEAUTY</a>
+            <a href="#">HOME & LIVING</a>
+            <a href="#">ACCESSORIES</a>
+            <a href="#">NEW ARRIVALS</a>
+            <a href="#">DEALS</a>
+            <a href="contact.php">CONTACT</a>
+        </nav>
 
     </div>
 
+</div>

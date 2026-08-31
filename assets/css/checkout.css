@@ -213,13 +213,13 @@
 }
 
 .checkout-field input::placeholder {
-    color: #94A3B8;
+    color: var(--color-text-muted);
 }
 
 .checkout-field input:focus,
 .checkout-field select:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
+    box-shadow: 0 0 0 3px var(--color-primary-alpha-08);
 }
 
 .checkout-input-icon {
@@ -406,7 +406,7 @@
 .place-order-button strong {
     padding: 6px 10px;
     border-radius: 6px;
-    background: rgba(255, 255, 255, .15);
+    background: var(--color-white-alpha-10);
     font-size: 12px;
 }
 

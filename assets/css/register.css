@@ -2,7 +2,7 @@
    VELYORA REGISTER PAGE
 ========================================================= */
 .page-header {
-    background: #eef4fa;
+    background: var(--color-background-soft);
     padding: 28px 0;
 }
 
@@ -15,7 +15,7 @@
 
 .page-header h1 {
     margin: 0;
-    color: #111827;
+    color: var(--color-heading);
     font-size: 32px;
     font-weight: 700;
 }
@@ -25,12 +25,12 @@
     align-items: center;
     gap: 14px;
     margin: 0;
-    color: #4b5563;
+    color: var(--color-text);
     font-size: 15px;
 }
 
 .breadcrumb a {
-    color: #0866c6;
+    color: var(--color-primary);
     text-decoration: none;
 }
 
@@ -39,11 +39,11 @@
 }
 
 .breadcrumb span:first-of-type {
-    color: #9ca3af;
+    color: var(--color-text-muted);
 }
 .register-page {
     padding: 60px 0 90px;
-    background: var(--color-background-soft); /* Restored soft background */
+    background: var(--color-background-soft);
 }
 
 .register-wrapper {
@@ -58,7 +58,7 @@
     overflow: hidden;
 }
 
-/* --- Left Showcase Panel (Restored Gradient) --- */
+/* --- Left Showcase Panel --- */
 .register-showcase {
     position: relative;
     padding: 50px 40px;
@@ -70,7 +70,6 @@
     justify-content: center;
 }
 
-/* Disabled the glow since the gradient is vibrant enough */
 .showcase-glow {
     display: none; 
 }
@@ -99,20 +98,20 @@
 
 .showcase-content p {
     font-size: 14px;
-    color: #CBD5E1;
+    color: var(--color-text-muted);
     line-height: 1.6;
     margin-bottom: 40px;
 }
 
-/* Glassmorphism Card (Adjusted for Gradient) */
+/* Glassmorphism Card */
 .feature-glass-card {
     display: flex;
     align-items: center;
     gap: 16px;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.12);
+    background: var(--color-white-alpha-10);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--color-white-alpha-10);
     border-radius: var(--radius-md);
 }
 
@@ -122,7 +121,7 @@
     flex-shrink: 0;
     display: grid;
     place-items: center;
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--color-white-alpha-10);
     color: var(--color-sky);
     font-size: 20px;
     border-radius: 10px;
@@ -197,7 +196,7 @@
 
 .social-btn:hover {
     background: var(--color-background-soft);
-    border-color: #cbd5e1;
+    border-color: var(--color-border);
 }
 
 .social-btn i {
@@ -227,7 +226,7 @@
     letter-spacing: 1px;
 }
 
-/* Inputs (Restored to White with Borders) */
+/* Inputs */
 .velyora-register-form {
     display: flex;
     flex-direction: column;
@@ -270,8 +269,8 @@
     width: 100%;
     height: 48px;
     padding: 0 16px 0 44px;
-    background: var(--color-white); /* Restored to white */
-    border: 1px solid var(--color-border); /* Restored border */
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     font-size: 13px;
     color: var(--color-heading);
@@ -288,7 +287,7 @@
 .input-wrapper input:focus,
 .input-wrapper select:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px var(--color-primary-alpha-12);
 }
 
 /* Checkboxes */
@@ -331,7 +330,7 @@
 .custom-check input:checked + .check-box::after {
     content: '\F26E';
     font-family: 'bootstrap-icons';
-    color: white;
+    color: var(--color-white);
     font-size: 12px;
 }
 
@@ -361,7 +360,7 @@
     font-weight: 700;
     cursor: pointer;
     transition: var(--transition);
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+    box-shadow: var(--shadow-primary-btn);
 }
 
 .submit-btn:hover {
