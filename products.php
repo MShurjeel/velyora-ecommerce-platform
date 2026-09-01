@@ -241,7 +241,7 @@ $filteredProducts = $stmt->fetchAll();
                                             <i class="bi bi-heart"></i>
                                         </button>
                                         <a href="product.php?id=<?php echo $product['id']; ?>" style="display: contents;">
-                                            <img src="uploads/products/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                                            <img src="assets/images/products/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                                         </a>
                                     </div>
                                     <div class="catalog-product-info">

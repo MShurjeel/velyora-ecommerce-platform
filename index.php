@@ -188,7 +188,7 @@ $featuredProducts = $stmt->fetchAll();
                 </a>
             </div>
             <div class="category-grid">
-                <a href="#" class="category-card category-electronics">
+                <a href="products.php?category=electronics" class="category-card category-electronics">
                     <div class="category-content">
                         <span>01</span>
                         <h3>Electronics</h3>
@@ -196,7 +196,7 @@ $featuredProducts = $stmt->fetchAll();
                         <i class="bi bi-arrow-up-right"></i>
                     </div>
                 </a>
-                <a href="#" class="category-card category-fashion">
+                <a href="products.php?category=fashion" class="category-card category-fashion">
                     <div class="category-content">
                         <span>02</span>
                         <h3>Fashion</h3>
@@ -204,7 +204,7 @@ $featuredProducts = $stmt->fetchAll();
                         <i class="bi bi-arrow-up-right"></i>
                     </div>
                 </a>
-                <a href="#" class="category-card category-beauty">
+                <a href="products.php?category=beauty" class="category-card category-beauty">
                     <div class="category-content">
                         <span>03</span>
                         <h3>Beauty</h3>
@@ -212,7 +212,7 @@ $featuredProducts = $stmt->fetchAll();
                         <i class="bi bi-arrow-up-right"></i>
                     </div>
                 </a>
-                <a href="#" class="category-card category-home">
+                <a href="products.php?category=home" class="category-card category-home">
                     <div class="category-content">
                         <span>04</span>
                         <h3>Home & Living</h3>
@@ -220,7 +220,7 @@ $featuredProducts = $stmt->fetchAll();
                         <i class="bi bi-arrow-up-right"></i>
                     </div>
                 </a>
-                <a href="#" class="category-card category-accessories">
+                <a href="products.php?category=accessories" class="category-card category-accessories">
                     <div class="category-content">
                         <span>05</span>
                         <h3>Accessories</h3>
@@ -274,7 +274,7 @@ FEATURED PRODUCTS
                    </button>
                    
                    <!-- Exactly matching the original static HTML structure -->
-                   <img src="uploads/products/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                   <img src="assets/images/products/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                </div>
                
                <div class="product-info">
