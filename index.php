@@ -19,6 +19,16 @@ $query = "
 // 3. Execute the query and fetch the data
 $stmt = $pdo->query($query);
 $featuredProducts = $stmt->fetchAll();
+
+// 4. Fetch Trending Products
+$trendingStmt = $pdo->query("
+    SELECT products.*, categories.name AS category_name 
+    FROM products 
+    JOIN categories ON products.category_id = categories.id 
+    WHERE products.id IN (5, 6, 7) AND products.status = 'active'
+    ORDER BY FIELD(products.id, 5, 6, 7)
+");
+$trendingProducts = $trendingStmt->fetchAll();
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -81,20 +91,22 @@ $featuredProducts = $stmt->fetchAll();
                         <span class="product-label">
                             TRENDING NOW
                         </span>
-                        <img
-                            src="assets/images/products/hero-product.png"
-                            alt="Featured Velyora product">
-                        <div class="hero-product-info">
-                            <span>
-                                Velyora Featured
-                            </span>
-                            <h3>
-                                Premium Everyday Essentials
-                            </h3>
-                            <strong>
-                                Rs. 4,999
-                            </strong>
-                        </div>
+                        <a href="product.php?id=1" style="text-decoration: none; color: inherit; display: block;">
+                            <img
+                                src="<?php echo htmlspecialchars(getProductImage(1)); ?>"
+                                alt="Featured Velyora product">
+                            <div class="hero-product-info">
+                                <span>
+                                    Velyora Featured
+                                </span>
+                                <h3>
+                                    Premium Wireless Headphones
+                                </h3>
+                                <strong>
+                                    Rs. 8,499
+                                </strong>
+                            </div>
+                        </a>
                     </div>
                     <!-- Floating Cards -->
                     <div class="floating-product floating-product-one">
@@ -273,8 +285,10 @@ FEATURED PRODUCTS
                        <i class="bi bi-heart"></i>
                    </button>
                    
-                   <!-- Exactly matching the original static HTML structure -->
-                   <img src="assets/images/products/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                   <!-- Dynamic linked product image -->
+                   <a href="product.php?id=<?php echo $product['id']; ?>" style="display: block;">
+                       <img src="<?php echo htmlspecialchars(getProductImage($product['id'], $product['image'])); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                   </a>
                </div>
                
                <div class="product-info">
@@ -358,48 +372,28 @@ FEATURED PRODUCTS
                 </div>
             </div>
             <div class="mini-product-grid">
-                <article class="mini-product-card">
-                    <img
-                        src="assets/images/products/product-5.png"
-                        alt="Trending product">
-                    <div>
-                        <span>Accessories</span>
-                        <h3>
-                            Everyday Essentials
-                        </h3>
-                        <strong>
-                            Rs. 2,499
-                        </strong>
-                    </div>
-                </article>
-                <article class="mini-product-card">
-                    <img
-                        src="assets/images/products/product-6.png"
-                        alt="Trending product">
-                    <div>
-                        <span>Fashion</span>
-                        <h3>
-                            Modern Street Style
-                        </h3>
-                        <strong>
-                            Rs. 3,999
-                        </strong>
-                    </div>
-                </article>
-                <article class="mini-product-card">
-                    <img
-                        src="assets/images/products/product-7.png"
-                        alt="Trending product">
-                    <div>
-                        <span>Electronics</span>
-                        <h3>
-                            Smart Tech Essential
-                        </h3>
-                        <strong>
-                            Rs. 6,499
-                        </strong>
-                    </div>
-                </article>
+                <?php if (!empty($trendingProducts)): ?>
+                    <?php foreach ($trendingProducts as $tProduct): ?>
+                        <article class="mini-product-card">
+                            <a href="product.php?id=<?php echo $tProduct['id']; ?>" style="display: block; flex-shrink: 0;">
+                                <img
+                                    src="<?php echo htmlspecialchars(getProductImage($tProduct['id'], $tProduct['image'])); ?>"
+                                    alt="<?php echo htmlspecialchars($tProduct['name']); ?>">
+                            </a>
+                            <div>
+                                <span><?php echo htmlspecialchars($tProduct['category_name']); ?></span>
+                                <h3>
+                                    <a href="product.php?id=<?php echo $tProduct['id']; ?>" style="text-decoration: none; color: inherit;">
+                                        <?php echo htmlspecialchars($tProduct['name']); ?>
+                                    </a>
+                                </h3>
+                                <strong>
+                                    Rs. <?php echo number_format($tProduct['sale_price'] ?? $tProduct['price']); ?>
+                                </strong>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
     </section>

@@ -44,6 +44,10 @@ $product['brand'] = 'Velyora';
 $product['rating'] = 4.8; // Static until review system is built
 $product['reviews'] = 124; // Static until review system is built
 
+// Fetch gallery images dynamically (up to 4 images, only existing files)
+$galleryImages = getProductImages($product['id'], $product['image']);
+$mainProductImage = !empty($galleryImages) ? $galleryImages[0] : 'assets/images/products/product-f-1.webp';
+
 // 5. Preserve Complex UI Data (Static for now)
 // To make these dynamic later, you will need separate tables for colors, specs, and features.
 $product['colors'] = [
@@ -128,20 +132,15 @@ foreach ($relatedDbProducts as $rel) {
                  PRODUCT GALLERY
             ================================================== -->
                 <div class="product-gallery">
-                    <div class="product-gallery-thumbnails">
-                        <button type="button" class="product-thumbnail active" data-image="assets/images/products/product-1.png">
-                            <img src="assets/images/products/product-1.png" alt="Product thumbnail">
-                        </button>
-                        <button type="button" class="product-thumbnail" data-image="assets/images/products/product-1.png">
-                            <img src="assets/images/products/product-1.png" alt="Product thumbnail">
-                        </button>
-                        <button type="button" class="product-thumbnail" data-image="assets/images/products/product-1.png">
-                            <img src="assets/images/products/product-1.png" alt="Product thumbnail">
-                        </button>
-                        <button type="button" class="product-thumbnail" data-image="assets/images/products/product-1.png">
-                            <img src="assets/images/products/product-1.png" alt="Product thumbnail">
-                        </button>
-                    </div>
+                    <?php if (!empty($galleryImages)): ?>
+                        <div class="product-gallery-thumbnails">
+                            <?php foreach ($galleryImages as $index => $img): ?>
+                                <button type="button" class="product-thumbnail <?php echo $index === 0 ? 'active' : ''; ?>" data-image="<?php echo htmlspecialchars($img); ?>">
+                                    <img src="<?php echo htmlspecialchars($img); ?>" alt="<?php echo htmlspecialchars($product['name']); ?> thumbnail <?php echo $index + 1; ?>">
+                                </button>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
 
                     <div class="product-main-image">
                         <?php if ($product['badge']): ?>
@@ -153,7 +152,7 @@ foreach ($relatedDbProducts as $rel) {
                             <i class="bi bi-heart"></i>
                         </button>
                         <div class="product-image-glow"></div>
-                        <img id="productMainImage" src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                        <img id="productMainImage" src="<?php echo htmlspecialchars($mainProductImage); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                     </div>
                 </div>
 
@@ -519,7 +518,7 @@ foreach ($relatedDbProducts as $rel) {
                                 <i class="bi bi-heart"></i>
                             </button>
                             <a href="product.php?id=<?php echo $related['id']; ?>">
-                                <img src="<?php echo htmlspecialchars($related['image']); ?>" alt="<?php echo htmlspecialchars($related['name']); ?>">
+                                <img src="<?php echo htmlspecialchars(getProductImage($related['id'], $related['image'])); ?>" alt="<?php echo htmlspecialchars($related['name']); ?>">
                             </a>
                         </div>
                         <div class="product-info">

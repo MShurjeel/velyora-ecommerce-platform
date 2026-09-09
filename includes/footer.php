@@ -5,7 +5,9 @@
     <div class="container">
         <div class="footer-main">
             <div>
-                <a href="index.php" class="footer-logo">Velyora</a>
+                <a href="index.php" class="footer-logo">
+                    <img src="assets/images/logo/logo-dark-bg.png" alt="Velyora" class="footer-logo-img">
+                </a>
                 <p>Everything you love, carefully brought together in one place.</p>
             </div>
             

@@ -682,14 +682,14 @@
     width: 100%;
     height: 100%;
     display: block;
-    object-fit: cover;
-    transition:
-        transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+    object-fit: contain;
+    padding: 12px;
+    transition: none;
 }
 
 .catalog-product-card:hover
 .catalog-product-image img {
-    transform: scale(1.045);
+    transform: none !important;
 }
 
 /* =========================================================

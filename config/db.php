@@ -18,4 +18,7 @@ try {
     // If connection fails, stop the page and show the error
     die("Database connection failed: " . $e->getMessage());
 }
+
+// Global helper functions
+require_once __DIR__ . '/../includes/functions.php';
 ?>

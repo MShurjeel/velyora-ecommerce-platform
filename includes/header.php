@@ -41,7 +41,7 @@
         <nav class="main-navbar">
             <!-- Logo -->
             <a href="index.php" class="brand-logo">
-                <img src="assets/images/logo/velyora-logo.png" alt="Velyora">
+                <img src="assets/images/logo/logo-light-bg.png" alt="Velyora">
             </a>
 
             <!-- Search -->
