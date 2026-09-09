@@ -3,9 +3,7 @@
 ========================================================= */
 .site-footer { background: var(--color-deep-navy); color: var(--color-text-muted); padding-top: 65px; }
 .footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; padding-bottom: 50px; }
-.footer-logo { display: inline-block; max-width: 100%; }
-.footer-logo-img,
-.footer-logo img { width: 70% !important; max-width: 60% !important; height: auto !important; display: block; }
+.footer-logo { display: inline-block; max-width: 53%; }
 .footer-main p { max-width: 330px; margin-top: 12px; font-size: 13px; }
 .footer-main h4 { color: var(--color-white); font-size: 14px; margin-bottom: 15px; }
 .footer-main > div > a:not(.footer-logo) { display: block; margin-bottom: 9px; font-size: 12px; }

@@ -1,8 +1,8 @@
-﻿{
+{
     "files.watcherExclude": {
-        "**/.git/objects/**": true,
-        "**/.git/subtree-cache/**": true
+        "**/.git/**": true
     },
-    "git.autorefresh": true,
+    "git.autorefresh": false,
+    "git.autoStash": false,
     "git.confirmSync": false
 }

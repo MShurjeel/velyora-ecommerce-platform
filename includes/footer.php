@@ -6,7 +6,7 @@
         <div class="footer-main">
             <div>
                 <a href="index.php" class="footer-logo">
-                    <img src="assets/images/logo/logo-dark-bg.png" alt="Velyora" class="footer-logo-img">
+                    <img src="assets/images/logo/logo-dark-bg.png" alt="Velyora">
                 </a>
                 <p>Everything you love, carefully brought together in one place.</p>
             </div>
@@ -49,6 +49,7 @@
 
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/cart.js"></script>
 
 </body>
 </html>

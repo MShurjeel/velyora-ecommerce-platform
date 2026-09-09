@@ -1,12 +1,12 @@
 <?php
 /**
- * AJAX Cart Handler for Velyora
+ * AJAX Wishlist Handler for Velyora
  */
 require_once __DIR__ . '/../config/db.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
-// Parse request payload (supports POST form-data, JSON body, or GET)
+// Parse request payload
 $input = [];
 $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
 if (stripos($contentType, 'application/json') !== false) {
@@ -19,35 +19,27 @@ $action = isset($request['action']) ? trim($request['action']) : 'get';
 $response = ['success' => false, 'message' => 'Invalid action.'];
 
 switch ($action) {
-    case 'add':
+    case 'toggle':
         $productId = isset($request['product_id']) ? (int)$request['product_id'] : 0;
-        $quantity = isset($request['quantity']) ? (int)$request['quantity'] : 1;
-        $response = addToCart($productId, $quantity);
-        break;
-
-    case 'update':
-        $cartId = isset($request['cart_id']) ? (int)$request['cart_id'] : 0;
-        $quantity = isset($request['quantity']) ? (int)$request['quantity'] : 1;
-        $response = updateCartQuantity($cartId, $quantity);
+        $response = toggleWishlist($productId);
         break;
 
     case 'remove':
-        $cartId = isset($request['cart_id']) ? (int)$request['cart_id'] : 0;
-        $response = removeFromCart($cartId);
+        $productId = isset($request['product_id']) ? (int)$request['product_id'] : 0;
+        $response = removeFromWishlist($productId);
         break;
 
-    case 'clear':
-        $response = clearCart();
+    case 'add_all_to_cart':
+        $response = addAllWishlistToCart();
         break;
 
     case 'get':
-        $items = getCartItems();
-        $totals = getCartTotals();
+        $items = getWishlistItems();
+        $count = getWishlistCount();
         $response = [
             'success' => true,
             'items' => $items,
-            'totals' => $totals,
-            'cart_count' => $totals['item_count']
+            'wishlist_count' => $count
         ];
         break;
 

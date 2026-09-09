@@ -32,7 +32,7 @@ include 'includes/header.php';
                     <a href="#v-pills-wishlist" class="nav-link" id="v-pills-wishlist-tab" data-bs-toggle="pill" data-bs-target="#v-pills-wishlist" role="tab">
                         <i class="bi bi-heart"></i>
                         <span>Wishlist</span>
-                        <span class="badge-count dark">4</span>
+                        <span class="badge-count dark profile-wishlist-badge"><?php echo getWishlistCount(); ?></span>
                     </a>
                     <a href="#v-pills-payments" class="nav-link" id="v-pills-payments-tab" data-bs-toggle="pill" data-bs-target="#v-pills-payments" role="tab">
                         <i class="bi bi-credit-card"></i>
@@ -82,5 +82,22 @@ include 'includes/header.php';
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function activateTabFromHash() {
+        const hash = window.location.hash;
+        if (hash) {
+            const trigger = document.querySelector(`[data-bs-target="${hash}"]`);
+            if (trigger && typeof bootstrap !== 'undefined') {
+                const tab = bootstrap.Tab.getOrCreateInstance(trigger);
+                tab.show();
+            }
+        }
+    }
+    activateTabFromHash();
+    window.addEventListener('hashchange', activateTabFromHash);
+});
+</script>
 
 <?php include 'includes/footer.php'; ?>

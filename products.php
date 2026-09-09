@@ -237,8 +237,9 @@ $filteredProducts = $stmt->fetchAll();
                                         <?php elseif ($product['is_featured'] == 1): ?>
                                             <span class="catalog-product-badge">BEST SELLER</span>
                                         <?php endif; ?>
-                                        <button class="catalog-wishlist" type="button" aria-label="Add to wishlist">
-                                            <i class="bi bi-heart"></i>
+                                        <?php $prodWish = isInWishlist($product['id']); ?>
+                                        <button class="catalog-wishlist <?php echo $prodWish ? 'active' : ''; ?>" type="button" aria-label="Add to wishlist" data-product-id="<?php echo $product['id']; ?>">
+                                            <i class="bi <?php echo $prodWish ? 'bi-heart-fill text-danger' : 'bi-heart'; ?>"></i>
                                         </button>
                                         <a href="product.php?id=<?php echo $product['id']; ?>" style="display: contents;">
                                             <img src="<?php echo htmlspecialchars(getProductImage($product['id'], $product['image'])); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">

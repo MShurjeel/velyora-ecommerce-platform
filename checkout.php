@@ -1,5 +1,6 @@
 <?php
 $pageTitle = "Checkout — Velyora";
+require_once 'config/db.php';
 
 $cartItems = [
     [
@@ -9,7 +10,7 @@ $cartItems = [
         'variant' => 'Midnight Blue',
         'price' => 8999,
         'quantity' => 1,
-        'image' => 'assets/images/products/product-1.png'
+        'image' => getProductImage(1)
     ],
     [
         'id' => 2,
@@ -18,7 +19,7 @@ $cartItems = [
         'variant' => 'Black · Medium',
         'price' => 3499,
         'quantity' => 2,
-        'image' => 'assets/images/products/product-2.png'
+        'image' => getProductImage(2)
     ],
     [
         'id' => 3,
@@ -27,7 +28,7 @@ $cartItems = [
         'variant' => 'Charcoal',
         'price' => 5999,
         'quantity' => 1,
-        'image' => 'assets/images/products/product-3.png'
+        'image' => getProductImage(3)
     ]
 ];
 

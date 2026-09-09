@@ -1,9 +1,10 @@
+<?php require_once __DIR__ . '/../config/db.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $pageTitle; ?></title>
+    <title><?php echo $pageTitle ?? 'Velyora — Modern Everyday Essentials'; ?></title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -87,68 +88,73 @@
                     </div>
                 </div>
 
+                <?php
+                $headerCartItems = getCartItems();
+                $headerCartTotals = getCartTotals();
+                $headerCartCount = $headerCartTotals['item_count'];
+                $headerWishlistCount = getWishlistCount();
+                ?>
                 <!-- Wishlist -->
-                <a href="#" class="header-action">
+                <a href="my-profile.php#v-pills-wishlist" class="header-action" aria-label="View Wishlist">
                     <i class="bi bi-heart"></i>
                     <span>Wishlist</span>
+                    <span class="cart-count wishlist-badge-count" style="<?php echo $headerWishlistCount > 0 ? '' : 'display:none;'; ?>"><?php echo $headerWishlistCount; ?></span>
                 </a>
 
                 <!-- Cart -->
                 <div class="cart-dropdown">
                     <!-- The Cart Toggle Button -->
-                    <button type="button" class="header-action cart-dropdown-toggle">
+                    <button type="button" class="header-action cart-dropdown-toggle" aria-label="View Cart">
                         <i class="bi bi-bag"></i>
                         <span>Cart</span>
-                        <span class="cart-count">3</span>
+                        <span class="cart-count cart-badge-count" style="<?php echo $headerCartCount > 0 ? '' : 'display:none;'; ?>"><?php echo $headerCartCount; ?></span>
                     </button>
 
-                    <!-- The Mini-Cart Menu (Matches image_67eec9.jpg) -->
+                    <!-- The Mini-Cart Menu -->
                     <div class="cart-dropdown-menu">
 
                         <!-- Cart Header -->
                         <div class="cart-header">
                             <span class="cart-title">Shopping Cart</span>
-                            <span class="cart-item-count">3 items</span>
+                            <span class="cart-item-count mini-cart-count"><?php echo $headerCartCount; ?> item<?php echo $headerCartCount === 1 ? '' : 's'; ?></span>
                         </div>
 
                         <!-- Cart Items List -->
                         <div class="cart-items-wrapper">
-
-                            <!-- Item 1 -->
-                            <div class="cart-item">
-                                <img src="assets/images/product-1.jpg" alt="Leather Bag" class="cart-item-img">
-                                <div class="cart-item-details">
-                                    <h6 class="cart-item-name">Leather Crossbody Bag</h6>
-                                    <span class="cart-item-variant">Tan / One Size</span>
-                                    <div class="cart-item-price-row">
-                                        <span class="cart-item-price">$124.00</span>
-                                        <span class="cart-item-qty">Qty: 1</span>
-                                    </div>
+                            <?php if (empty($headerCartItems)): ?>
+                                <div class="mini-cart-empty text-center py-4" style="padding: 24px 15px; color: var(--color-text-light); text-align: center;">
+                                    <i class="bi bi-bag" style="font-size: 28px; color: var(--color-border); display: block; margin-bottom: 8px;"></i>
+                                    <span style="font-size: 13px;">Your cart is empty</span>
                                 </div>
-                                <button type="button" class="cart-item-remove"><i class="bi bi-x"></i></button>
-                            </div>
-
-                            <!-- Item 2 -->
-                            <div class="cart-item">
-                                <img src="assets/images/product-2.jpg" alt="T-Shirt" class="cart-item-img">
-                                <div class="cart-item-details">
-                                    <h6 class="cart-item-name">Cotton Blend T-Shirt</h6>
-                                    <span class="cart-item-variant">White / M</span>
-                                    <div class="cart-item-price-row">
-                                        <span class="cart-item-price">$29.00</span>
-                                        <span class="cart-item-qty">Qty: 2</span>
+                            <?php else: ?>
+                                <?php foreach ($headerCartItems as $hItem): ?>
+                                    <div class="cart-item" data-cart-id="<?php echo $hItem['cart_id']; ?>">
+                                        <a href="product.php?id=<?php echo $hItem['product_id']; ?>">
+                                            <img src="<?php echo htmlspecialchars($hItem['image']); ?>" alt="<?php echo htmlspecialchars($hItem['name']); ?>" class="cart-item-img">
+                                        </a>
+                                        <div class="cart-item-details">
+                                            <h6 class="cart-item-name">
+                                                <a href="product.php?id=<?php echo $hItem['product_id']; ?>" style="text-decoration:none; color:inherit;">
+                                                    <?php echo htmlspecialchars($hItem['name']); ?>
+                                                </a>
+                                            </h6>
+                                            <span class="cart-item-variant"><?php echo htmlspecialchars($hItem['variant']); ?></span>
+                                            <div class="cart-item-price-row">
+                                                <span class="cart-item-price">Rs. <?php echo number_format($hItem['price']); ?></span>
+                                                <span class="cart-item-qty">Qty: <?php echo $hItem['quantity']; ?></span>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="cart-item-remove mini-cart-remove" data-cart-id="<?php echo $hItem['cart_id']; ?>" title="Remove item"><i class="bi bi-x"></i></button>
                                     </div>
-                                </div>
-                                <button type="button" class="cart-item-remove"><i class="bi bi-x"></i></button>
-                            </div>
-
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Cart Footer / Summary -->
                         <div class="cart-footer">
                             <div class="cart-subtotal">
                                 <span class="subtotal-label">Subtotal</span>
-                                <span class="subtotal-amount">$153.00</span>
+                                <span class="subtotal-amount mini-cart-subtotal"><?php echo $headerCartTotals['subtotal_formatted']; ?></span>
                             </div>
                             <a href="checkout.php" class="btn-checkout">Checkout</a>
                             <a href="cart.php" class="btn-view-cart">View full cart &rarr;</a>

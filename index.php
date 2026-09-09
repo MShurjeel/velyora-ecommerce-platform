@@ -281,9 +281,10 @@ FEATURED PRODUCTS
                        <span class="product-badge">BEST SELLER</span>
                    <?php endif; ?>
 
-                   <button class="wishlist-button">
-                       <i class="bi bi-heart"></i>
-                   </button>
+                    <?php $homeWish = isInWishlist($product['id']); ?>
+                    <button type="button" class="wishlist-button <?php echo $homeWish ? 'active' : ''; ?>" data-product-id="<?php echo $product['id']; ?>" aria-label="Add to wishlist">
+                        <i class="bi <?php echo $homeWish ? 'bi-heart-fill text-danger' : 'bi-heart'; ?>"></i>
+                    </button>
                    
                    <!-- Dynamic linked product image -->
                    <a href="product.php?id=<?php echo $product['id']; ?>" style="display: block;">
@@ -316,9 +317,9 @@ FEATURED PRODUCTS
                        <?php endif; ?>
                    </div>
                    
-                   <button class="add-cart-button">
-                       <i class="bi bi-bag-plus"></i> Add to Cart
-                   </button>
+                    <button class="add-cart-button" type="button" data-product-id="<?php echo $product['id']; ?>">
+                        <i class="bi bi-bag-plus"></i> Add to Cart
+                    </button>
                </div>
            </article>
        <?php endforeach; ?>

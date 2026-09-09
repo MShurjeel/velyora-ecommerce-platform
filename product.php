@@ -48,21 +48,17 @@ $product['reviews'] = 124; // Static until review system is built
 $galleryImages = getProductImages($product['id'], $product['image']);
 $mainProductImage = !empty($galleryImages) ? $galleryImages[0] : 'assets/images/products/product-f-1.webp';
 
-// 5. Preserve Complex UI Data (Static for now)
-// To make these dynamic later, you will need separate tables for colors, specs, and features.
-$product['colors'] = [
-    ['name' => 'Midnight', 'value' => '#0A1020'],
-    ['name' => 'Cloud', 'value' => '#F1F5F9']
-];
-$product['features'] = [
-    ['icon' => 'bi-star', 'title' => 'Velyora Quality', 'text' => 'Built to last with premium materials.']
-];
-$product['included'] = [$product['name'], 'Quick Start Guide', 'Warranty Documentation'];
-$product['specifications'] = [
-    'General' => ['Category' => $product['category'], 'Status' => 'In Stock']
-];
+// 5. Dynamic Product Details (Story, Features, What's Included, Specifications, Colors)
+$details = getProductDetailsData($product);
+$product['story_heading'] = !empty($product['story_heading']) ? $product['story_heading'] : $details['story_heading'];
+$product['story_p1'] = !empty($product['story_p1']) ? $product['story_p1'] : $details['story_p1'];
+$product['story_p2'] = !empty($product['story_p2']) ? $product['story_p2'] : $details['story_p2'];
+$product['colors'] = $details['colors'];
+$product['features'] = $details['features'];
+$product['included'] = $details['included'];
+$product['specifications'] = $details['specifications'];
 $product['reviews_data'] = [
-    ['name' => 'Verified Buyer', 'rating' => 5, 'date' => 'August 2026', 'title' => 'Excellent purchase', 'text' => 'Highly recommended!']
+    ['name' => 'Verified Buyer', 'rating' => 5, 'date' => 'August 2026', 'title' => 'Excellent purchase', 'text' => 'Absolutely love the ' . $product['name'] . '. The build quality and attention to detail exceeded my expectations.']
 ];
 
 // 6. Fetch Dynamic Related Products (Same Category)
@@ -148,8 +144,9 @@ foreach ($relatedDbProducts as $rel) {
                                 <?php echo htmlspecialchars($product['badge']); ?>
                             </span>
                         <?php endif; ?>
-                        <button type="button" class="product-image-wishlist" aria-label="Add to wishlist">
-                            <i class="bi bi-heart"></i>
+                        <?php $isWishlisted = isInWishlist($product['id']); ?>
+                        <button type="button" class="product-image-wishlist <?php echo $isWishlisted ? 'active' : ''; ?>" aria-label="Add to wishlist" data-product-id="<?php echo $product['id']; ?>">
+                            <i class="bi <?php echo $isWishlisted ? 'bi-heart-fill text-danger' : 'bi-heart'; ?>"></i>
                         </button>
                         <div class="product-image-glow"></div>
                         <img id="productMainImage" src="<?php echo htmlspecialchars($mainProductImage); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
@@ -238,12 +235,12 @@ foreach ($relatedDbProducts as $rel) {
                             Add to Cart
                         </button>
 
-                        <button type="button" class="product-detail-wishlist" aria-label="Add to wishlist">
-                            <i class="bi bi-heart"></i>
+                        <button type="button" class="product-detail-wishlist <?php echo $isWishlisted ? 'active' : ''; ?>" aria-label="Add to wishlist" data-product-id="<?php echo $product['id']; ?>">
+                            <i class="bi <?php echo $isWishlisted ? 'bi-heart-fill text-danger' : 'bi-heart'; ?>"></i>
                         </button>
                     </div>
 
-                    <button type="button" class="product-buy-now">
+                    <button type="button" class="product-buy-now" data-product-id="<?php echo $product['id']; ?>">
                         <i class="bi bi-lightning-charge-fill"></i>
                         Buy It Now
                     </button>
@@ -328,21 +325,15 @@ foreach ($relatedDbProducts as $rel) {
                 <div class="product-description-layout">
                     <div class="product-description-main">
                         <span class="section-eyebrow">PRODUCT STORY</span>
-                        <h2>Designed for everyday listening.</h2>
+                        <h2><?php echo htmlspecialchars($product['story_heading']); ?></h2>
                         <p>
-                            The Premium Wireless Headphones combine
-                            immersive audio, dependable wireless
-                            connectivity and an understated Velyora
-                            aesthetic designed to fit naturally into
-                            everyday life.
+                            <?php echo nl2br(htmlspecialchars($product['story_p1'])); ?>
                         </p>
-                        <p>
-                            Whether you're working, travelling or
-                            simply enjoying your favourite playlist,
-                            the balanced sound profile and comfortable
-                            construction are designed to keep you
-                            listening longer.
-                        </p>
+                        <?php if (!empty($product['story_p2'])): ?>
+                            <p>
+                                <?php echo nl2br(htmlspecialchars($product['story_p2'])); ?>
+                            </p>
+                        <?php endif; ?>
 
                         <div class="product-feature-grid">
                             <?php foreach ($product['features'] as $feature): ?>
@@ -514,8 +505,9 @@ foreach ($relatedDbProducts as $rel) {
                                     <?php echo htmlspecialchars($related['badge']); ?>
                                 </span>
                             <?php endif; ?>
-                            <button type="button" class="wishlist-button" aria-label="Add to wishlist">
-                                <i class="bi bi-heart"></i>
+                            <?php $relWish = isInWishlist($related['id']); ?>
+                            <button type="button" class="wishlist-button <?php echo $relWish ? 'active' : ''; ?>" aria-label="Add to wishlist" data-product-id="<?php echo $related['id']; ?>">
+                                <i class="bi <?php echo $relWish ? 'bi-heart-fill text-danger' : 'bi-heart'; ?>"></i>
                             </button>
                             <a href="product.php?id=<?php echo $related['id']; ?>">
                                 <img src="<?php echo htmlspecialchars(getProductImage($related['id'], $related['image'])); ?>" alt="<?php echo htmlspecialchars($related['name']); ?>">

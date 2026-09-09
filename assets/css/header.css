@@ -41,9 +41,7 @@
     gap: 30px;
 }
 
-.brand-logo img,
-.header-logo-img,
-.header-logo img {
+.brand-logo img {
     width: 170px;
     height: auto;
 }

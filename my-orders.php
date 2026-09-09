@@ -21,9 +21,9 @@
             </div>
             <div class="order-body">
                 <div class="order-images">
-                    <img src="assets/images/product-1.jpg" alt="Item">
-                    <img src="assets/images/product-2.jpg" alt="Item">
-                    <img src="assets/images/product-3.jpg" alt="Item">
+                    <img src="<?php echo htmlspecialchars(getProductImage(1)); ?>" alt="Item 1">
+                    <img src="<?php echo htmlspecialchars(getProductImage(2)); ?>" alt="Item 2">
+                    <img src="<?php echo htmlspecialchars(getProductImage(3)); ?>" alt="Item 3">
                 </div>
                 <div class="order-summary">
                     <div class="summary-row">
@@ -54,7 +54,7 @@
             </div>
             <div class="order-body">
                 <div class="order-images">
-                    <img src="assets/images/product-4.jpg" alt="Item">
+                    <img src="<?php echo htmlspecialchars(getProductImage(4)); ?>" alt="Item 4">
                 </div>
                 <div class="order-summary">
                     <div class="summary-row">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="summary-row total">
                         <span>Total</span>
-                        <strong>$129.99</strong>
+                        <strong>Rs. 4,999</strong>
                     </div>
                 </div>
             </div>
