@@ -174,6 +174,42 @@ document.addEventListener('DOMContentLoaded', function () {
                 const subtotalEl = document.querySelector('.mini-cart-subtotal');
                 if (subtotalEl) subtotalEl.textContent = result.totals.subtotal_formatted;
             }
+
+            // Re-render mini-cart items completely
+            if (result.items) {
+                const wrapper = document.querySelector('.cart-items-wrapper');
+                if (wrapper) {
+                    if (result.items.length === 0) {
+                        wrapper.innerHTML = `
+                            <div class="mini-cart-empty text-center py-4" style="padding: 24px 15px; color: var(--color-text-light); text-align: center;">
+                                <i class="bi bi-bag" style="font-size: 28px; color: var(--color-border); display: block; margin-bottom: 8px;"></i>
+                                <span style="font-size: 13px;">Your cart is empty</span>
+                            </div>
+                        `;
+                    } else {
+                        wrapper.innerHTML = result.items.map(item => `
+                            <div class="cart-item mini-cart-item" data-cart-id="${item.cart_id}">
+                                <a href="product.php?id=${item.product_id}">
+                                    <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                                </a>
+                                <div class="cart-item-details">
+                                    <h6 class="cart-item-name">
+                                        <a href="product.php?id=${item.product_id}" style="text-decoration:none; color:inherit;">
+                                            ${item.name}
+                                        </a>
+                                    </h6>
+                                    <span class="cart-item-variant">${item.variant}</span>
+                                    <div class="cart-item-price-row">
+                                        <span class="cart-item-price">Rs. ${item.price.toLocaleString()}</span>
+                                        <span class="cart-item-qty">Qty: ${item.quantity}</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="cart-item-remove mini-cart-remove" data-cart-id="${item.cart_id}" title="Remove item"><i class="bi bi-x"></i></button>
+                            </div>
+                        `).join('');
+                    }
+                }
+            }
         } else {
             addBtn.innerHTML = originalHtml;
             showToast(result.message || 'Could not add to cart.', 'danger');
@@ -393,7 +429,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!plusBtn) return;
 
         const cartId = plusBtn.getAttribute('data-cart-id');
-        const cartItem = plusBtn.closest('.cart-item');
+        const cartItem = plusBtn.closest('.cart-item, .mini-cart-item');
         const qtyVal = cartItem ? cartItem.querySelector('.cart-qty-val') : null;
         if (!cartId || !qtyVal) return;
 
