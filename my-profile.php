@@ -1,5 +1,12 @@
 <?php
 $pageTitle = "My Profile — Velyora";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
 include 'includes/header.php';
 ?>
 
@@ -18,7 +25,7 @@ include 'includes/header.php';
             <aside class="account-sidebar">
                 <div class="sidebar-profile">
                     <img src="assets/images/users/default-avatar.png" alt="User Profile" class="profile-img">
-                    <h4 class="profile-name">Sarah Anderson</h4>
+                    <h4 class="profile-name"><?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Guest'); ?></h4>
                     <span class="profile-badge"><i class="bi bi-star-fill"></i> Premium Member</span>
                 </div>
 

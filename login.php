@@ -110,6 +110,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <p class="login-card-description">Sign in to continue to your Velyora account.</p>
                 
+                <?php if (isset($_GET['registered']) && $_GET['registered'] == 'success'): ?>
+                    <div class="alert alert-success" role="alert" style="font-size: 13px; border-radius: var(--radius-sm);">
+                        Registration successful! Please sign in with your new account.
+                    </div>
+                <?php endif; ?>
+
                 <?php if ($error): ?>
                     <div class="alert alert-danger" role="alert" style="font-size: 13px; border-radius: var(--radius-sm);">
                         <?php echo htmlspecialchars($error); ?>

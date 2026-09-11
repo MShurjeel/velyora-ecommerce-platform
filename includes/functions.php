@@ -577,7 +577,10 @@ if (!function_exists('getUserSessionId')) {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        return session_id();
+        if (isset($_SESSION['user_id'])) {
+            return 'user_' . $_SESSION['user_id'];
+        }
+        return null;
     }
 }
 
@@ -721,7 +724,7 @@ if (!function_exists('addToCart')) {
         $sessionId = getUserSessionId();
 
         if (!$pdo || empty($sessionId) || $productId <= 0) {
-            return ['success' => false, 'message' => 'Invalid product or session.'];
+            return ['success' => false, 'message' => 'Please sign in to add items to your cart.', 'requires_login' => true];
         }
 
         try {
@@ -992,7 +995,7 @@ if (!function_exists('toggleWishlist')) {
         $sessionId = getUserSessionId();
 
         if (!$pdo || empty($sessionId) || $productId <= 0) {
-            return ['success' => false, 'message' => 'Invalid product or session.'];
+            return ['success' => false, 'message' => 'Please sign in to manage your wishlist.', 'requires_login' => true];
         }
 
         try {

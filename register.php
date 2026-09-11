@@ -44,11 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':country' => $country,
                 ':promotions' => $promotions
             ])) {
-                // Auto-login
-                $_SESSION['user_id'] = $pdo->lastInsertId();
-                $_SESSION['user_name'] = $fullname;
-                $_SESSION['user_email'] = $email;
-                header("Location: index.php");
+                header("Location: login.php?registered=success");
                 exit;
             } else {
                 $error = "An error occurred during registration. Please try again.";

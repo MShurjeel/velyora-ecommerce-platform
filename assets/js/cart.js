@@ -168,6 +168,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
             updateCartBadges(result.cart_count);
             showToast(result.message, 'success');
+        } else {
+            if (result.requires_login) {
+                showToast('Please sign in to continue.', 'warning');
+                setTimeout(() => {
+                    window.location.href = 'login.php';
+                }, 1000);
+            } else {
+                addBtn.innerHTML = originalHtml;
+                showToast(result.message, 'danger');
+            }
+        }
+
+        if (result.success) {
 
             // Refresh mini-cart subtotal if present
             if (result.totals && result.totals.subtotal_formatted) {

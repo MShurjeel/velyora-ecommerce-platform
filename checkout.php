@@ -2,59 +2,30 @@
 $pageTitle = "Checkout — Velyora";
 require_once 'config/db.php';
 
-$cartItems = [
-    [
-        'id' => 1,
-        'name' => 'Premium Wireless Headphones',
-        'category' => 'Electronics',
-        'variant' => 'Midnight Blue',
-        'price' => 8999,
-        'quantity' => 1,
-        'image' => getProductImage(1)
-    ],
-    [
-        'id' => 2,
-        'name' => 'Premium Everyday Hoodie',
-        'category' => 'Fashion',
-        'variant' => 'Black · Medium',
-        'price' => 3499,
-        'quantity' => 2,
-        'image' => getProductImage(2)
-    ],
-    [
-        'id' => 3,
-        'name' => 'Urban Everyday Backpack',
-        'category' => 'Accessories',
-        'variant' => 'Charcoal',
-        'price' => 5999,
-        'quantity' => 1,
-        'image' => getProductImage(3)
-    ]
-];
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
 $cartItems = getCartItems();
 $totals = getCartTotals();
-$subtotal = $totals['subtotal'];
-$shipping = $totals['shipping'];
-$discount = $totals['discount'];
-$tax = $totals['tax'];
-$total = $totals['total'];
-$itemCount = $totals['item_count'];
 
-$subtotal = 0;
-
-foreach ($cartItems as $item)
-    $subtotal += $item['price'] * $item['quantity'];
 // Redirect to cart if empty
 if (empty($cartItems)) {
     header('Location: cart.php');
     exit;
 }
 
-$shipping = $subtotal >= 3000 ? 0 : 250;
-$discount = 0;
-$tax = round(($subtotal - $discount) * 0.02);
-$total = $subtotal + $shipping + $tax - $discount;
-$itemCount = array_sum(array_column($cartItems, 'quantity'));
+$subtotal = $totals['subtotal'];
+$shipping = $totals['shipping'];
+$discount = $totals['discount'];
+$tax = $totals['tax'];
+$total = $totals['total'];
+$itemCount = $totals['item_count'];
 ?>
 
 <!DOCTYPE html>
