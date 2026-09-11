@@ -142,24 +142,24 @@ $itemCount = array_sum(array_column($cartItems, 'quantity'));
                             <div class="checkout-form-grid">
                                 <div class="checkout-field">
                                     <label for="first-name">First Name</label>
-                                    <input id="first-name" type="text" placeholder="Enter your first name">
+                                    <input id="first-name" type="text" placeholder="Enter your first name" required>
                                 </div>
                                 <div class="checkout-field">
                                     <label for="last-name">Last Name</label>
-                                    <input id="last-name" type="text" placeholder="Enter your last name">
+                                    <input id="last-name" type="text" placeholder="Enter your last name" required>
                                 </div>
                                 <div class="checkout-field checkout-field-full">
                                     <label for="email">Email Address</label>
                                     <div class="checkout-input-icon">
                                         <i class="bi bi-envelope"></i>
-                                        <input id="email" type="email" placeholder="you@example.com">
+                                        <input id="email" type="email" placeholder="you@example.com" required>
                                     </div>
                                 </div>
                                 <div class="checkout-field checkout-field-full">
                                     <label for="phone">Phone Number</label>
                                     <div class="checkout-input-icon">
                                         <i class="bi bi-telephone"></i>
-                                        <input id="phone" type="tel" placeholder="+92 300 0000000">
+                                        <input id="phone" type="tel" placeholder="+92 300 0000000" required>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +180,7 @@ $itemCount = array_sum(array_column($cartItems, 'quantity'));
                             <div class="checkout-form-grid">
                                 <div class="checkout-field checkout-field-full">
                                     <label for="address">Street Address</label>
-                                    <input id="address" type="text" placeholder="House number, street name">
+                                    <input id="address" type="text" placeholder="House number, street name" required>
                                 </div>
                                 <div class="checkout-field checkout-field-full">
                                     <label for="address-2">Apartment, Suite, etc. <small>Optional</small></label>
@@ -188,11 +188,11 @@ $itemCount = array_sum(array_column($cartItems, 'quantity'));
                                 </div>
                                 <div class="checkout-field">
                                     <label for="city">City</label>
-                                    <input id="city" type="text" placeholder="Your city">
+                                    <input id="city" type="text" placeholder="Your city" required>
                                 </div>
                                 <div class="checkout-field">
                                     <label for="province">Province</label>
-                                    <select id="province">
+                                    <select id="province" required>
                                         <option value="">Select province</option>
                                         <option>Punjab</option>
                                         <option>Sindh</option>
@@ -205,11 +205,11 @@ $itemCount = array_sum(array_column($cartItems, 'quantity'));
                                 </div>
                                 <div class="checkout-field">
                                     <label for="postal-code">Postal Code</label>
-                                    <input id="postal-code" type="text" placeholder="Postal code">
+                                    <input id="postal-code" type="text" placeholder="Postal code" required>
                                 </div>
                                 <div class="checkout-field">
                                     <label for="country">Country</label>
-                                    <select id="country">
+                                    <select id="country" required>
                                         <option value="">Select country</option>
                                         <option selected>Pakistan</option>
                                     </select>

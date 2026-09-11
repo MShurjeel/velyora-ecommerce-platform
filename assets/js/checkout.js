@@ -72,12 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (index < stepCards.length - 1 && body) {
             const nextBtn = document.createElement('button');
             nextBtn.type = 'button';
-            nextBtn.className = 'btn btn-primary mt-4';
+            nextBtn.className = 'btn-primary-custom mt-4 w-100';
             nextBtn.innerHTML = 'Continue to Next Step <i class="bi bi-arrow-right"></i>';
-            nextBtn.style.padding = '12px 24px';
-            nextBtn.style.borderRadius = '999px';
-            nextBtn.style.fontWeight = '600';
-            
             nextBtn.addEventListener('click', () => {
                 // Basic validation before moving next
                 const inputs = body.querySelectorAll('input[required], select[required]');
@@ -113,11 +109,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         progressSteps.forEach((step, i) => {
-            if (i <= index) {
+            if (i === index) {
                 step.classList.add('active');
+            } else if (i < index) {
+                step.classList.add('active'); // Keep previous steps active to show they are completed
             } else {
-                // Don't remove active if we are just going back to edit
-                // step.classList.remove('active');
+                step.classList.remove('active'); // Remove active from future steps
             }
         });
     }
