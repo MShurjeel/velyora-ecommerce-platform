@@ -47,11 +47,25 @@ document.addEventListener('DOMContentLoaded', function () {
     const stepCards = document.querySelectorAll('.checkout-card');
     const progressSteps = document.querySelectorAll('.checkout-step');
 
-    // Hide all bodies except first
+    // Hide all bodies except first by adding collapsed class
     stepCards.forEach((card, index) => {
         const body = card.querySelector('.checkout-card-body');
-        if (index !== 0 && body) {
-            body.style.display = 'none';
+        const header = card.querySelector('.checkout-card-header');
+        
+        if (index !== 0) {
+            card.classList.add('collapsed');
+        } else {
+            card.classList.remove('collapsed');
+        }
+
+        // Add click listener to header to open step (if it's a previous step)
+        if (header) {
+            header.addEventListener('click', () => {
+                // Check if progress allows going to this step (e.g. only allow completed or current active steps)
+                if (progressSteps[index] && progressSteps[index].classList.contains('active')) {
+                    goToStep(index);
+                }
+            });
         }
 
         // Add a "Next" button to each section except the last
@@ -90,14 +104,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function goToStep(index) {
         stepCards.forEach((c, i) => {
-            const body = c.querySelector('.checkout-card-body');
-            if (body) {
-                if (i === index) {
-                    body.style.display = 'block';
-                    c.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else {
-                    body.style.display = 'none';
-                }
+            if (i === index) {
+                c.classList.remove('collapsed');
+                c.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                c.classList.add('collapsed');
             }
         });
 
@@ -105,7 +116,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (i <= index) {
                 step.classList.add('active');
             } else {
-                step.classList.remove('active');
+                // Don't remove active if we are just going back to edit
+                // step.classList.remove('active');
             }
         });
     }

@@ -122,7 +122,7 @@ $pageTitle = "Sign In — Velyora";
                 </div>
                 <div class="login-register">
                     <span>Don't have an account?</span>
-                    <a href="#">Create an Account</a>
+                    <a href="register.php">Create an Account</a>
                 </div>
                 <div class="login-security">
                     <i class="bi bi-shield-lock"></i>
