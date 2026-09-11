@@ -407,16 +407,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (result.success) {
-            qtyVal.textContent = result.quantity;
+            // Update all quantity displays for this cart ID (e.g. main cart AND mini-cart)
+            document.querySelectorAll(`[data-cart-id="${cartId}"] .cart-qty-val`).forEach(el => {
+                el.textContent = result.quantity;
+            });
+            document.querySelectorAll(`[data-cart-id="${cartId}"] .cart-item-qty`).forEach(el => {
+                el.textContent = `Qty: ${result.quantity}`;
+            });
+            
             updateCartBadges(result.cart_count);
             updateCartSummaryUI(result.totals);
 
-            // Update item total
-            const priceStrong = cartItem.querySelector('.cart-item-price strong');
-            const itemTotalEl = cartItem.querySelector('.item-total-val');
-            if (priceStrong && itemTotalEl) {
-                const unitPrice = parseFloat(priceStrong.textContent.replace(/[^0-9.]/g, '')) || 0;
-                itemTotalEl.textContent = `Rs. ${(unitPrice * result.quantity).toLocaleString()}`;
+            if (result.items) {
+                const updatedItem = result.items.find(item => item.cart_id == cartId);
+                if (updatedItem) {
+                    // Update all item totals for this cart ID
+                    document.querySelectorAll(`[data-cart-id="${cartId}"] .item-total-val`).forEach(el => {
+                        el.textContent = `Rs. ${(updatedItem.item_total).toLocaleString()}`;
+                    });
+                }
             }
         } else {
             showToast(result.message, 'danger');
@@ -429,7 +438,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!minusBtn) return;
 
         const cartId = minusBtn.getAttribute('data-cart-id');
-        const cartItem = minusBtn.closest('.cart-item');
+        const cartItem = minusBtn.closest('.cart-item, .mini-cart-item');
         const qtyVal = cartItem ? cartItem.querySelector('.cart-qty-val') : null;
         if (!cartId || !qtyVal) return;
 
@@ -438,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (newQty <= 0) {
             // Trigger remove
-            const removeBtn = cartItem.querySelector('.cart-remove-button');
+            const removeBtn = cartItem.querySelector('.cart-remove-button, .mini-cart-remove');
             if (removeBtn) removeBtn.click();
             return;
         }
@@ -450,16 +459,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (result.success) {
-            qtyVal.textContent = result.quantity;
+            // Update all quantity displays for this cart ID
+            document.querySelectorAll(`[data-cart-id="${cartId}"] .cart-qty-val`).forEach(el => {
+                el.textContent = result.quantity;
+            });
+            document.querySelectorAll(`[data-cart-id="${cartId}"] .cart-item-qty`).forEach(el => {
+                el.textContent = `Qty: ${result.quantity}`;
+            });
+            
             updateCartBadges(result.cart_count);
             updateCartSummaryUI(result.totals);
 
-            // Update item total
-            const priceStrong = cartItem.querySelector('.cart-item-price strong');
-            const itemTotalEl = cartItem.querySelector('.item-total-val');
-            if (priceStrong && itemTotalEl) {
-                const unitPrice = parseFloat(priceStrong.textContent.replace(/[^0-9.]/g, '')) || 0;
-                itemTotalEl.textContent = `Rs. ${(unitPrice * result.quantity).toLocaleString()}`;
+            if (result.items) {
+                const updatedItem = result.items.find(item => item.cart_id == cartId);
+                if (updatedItem) {
+                    // Update all item totals for this cart ID
+                    document.querySelectorAll(`[data-cart-id="${cartId}"] .item-total-val`).forEach(el => {
+                        el.textContent = `Rs. ${(updatedItem.item_total).toLocaleString()}`;
+                    });
+                }
             }
         } else {
             showToast(result.message, 'danger');

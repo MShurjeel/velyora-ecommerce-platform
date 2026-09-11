@@ -23,21 +23,25 @@ switch ($action) {
         $productId = isset($request['product_id']) ? (int)$request['product_id'] : 0;
         $quantity = isset($request['quantity']) ? (int)$request['quantity'] : 1;
         $response = addToCart($productId, $quantity);
+        if ($response['success']) $response['items'] = getCartItems();
         break;
 
     case 'update':
         $cartId = isset($request['cart_id']) ? (int)$request['cart_id'] : 0;
         $quantity = isset($request['quantity']) ? (int)$request['quantity'] : 1;
         $response = updateCartQuantity($cartId, $quantity);
+        if ($response['success']) $response['items'] = getCartItems();
         break;
 
     case 'remove':
         $cartId = isset($request['cart_id']) ? (int)$request['cart_id'] : 0;
         $response = removeFromCart($cartId);
+        if ($response['success']) $response['items'] = getCartItems();
         break;
 
     case 'clear':
         $response = clearCart();
+        if ($response['success']) $response['items'] = getCartItems();
         break;
 
     case 'get':
