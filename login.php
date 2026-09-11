@@ -1,5 +1,37 @@
 <?php
+require_once 'config/db.php';
 $pageTitle = "Sign In — Velyora";
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    
+    if (empty($email) || empty($password)) {
+        $error = "Please enter both email and password.";
+    } else {
+        $stmt = $pdo->prepare("SELECT id, fullname, password_hash FROM users WHERE email = :email");
+        $stmt->execute([':email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['password_hash'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_name'] = $user['fullname'];
+            $_SESSION['user_email'] = $email;
+            
+            // Redirect to index or previous page
+            header("Location: index.php");
+            exit;
+        } else {
+            $error = "Invalid email or password.";
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,7 +109,14 @@ $pageTitle = "Sign In — Velyora";
                     </div>
                 </div>
                 <p class="login-card-description">Sign in to continue to your Velyora account.</p>
-                <form class="login-form" action="#" method="post">
+                
+                <?php if ($error): ?>
+                    <div class="alert alert-danger" role="alert" style="font-size: 13px; border-radius: var(--radius-sm);">
+                        <?php echo htmlspecialchars($error); ?>
+                    </div>
+                <?php endif; ?>
+
+                <form class="login-form" action="login.php" method="post">
                     <div class="login-field">
                         <label for="login-email">Email Address</label>
                         <div class="login-input">

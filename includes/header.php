@@ -65,26 +65,54 @@
                     </button>
 
                     <div class="account-dropdown-menu">
-                        <div class="account-dropdown-header">
-                            <h3>Welcome!</h3>
-                            <p>Sign in for the best experience</p>
-                        </div>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                            <div class="account-dropdown-header">
+                                <h3>Hello, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h3>
+                                <p>Manage your account here</p>
+                            </div>
 
-                        <div class="account-dropdown-actions">
-                            <a href="login.php" class="account-signin">Sign In</a>
-                            <a href="register.php" class="account-register">Create Account</a>
-                        </div>
+                            <div class="account-dropdown-links">
+                                <a href="my-profile.php">
+                                    <i class="bi bi-person-circle"></i>
+                                    <span>My Profile</span>
+                                </a>
+                                <a href="orders.php">
+                                    <i class="bi bi-box-seam"></i>
+                                    <span>My Orders</span>
+                                </a>
+                                <a href="help-center.php">
+                                    <i class="bi bi-question-circle"></i>
+                                    <span>Help Center</span>
+                                </a>
+                                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--color-border);">
+                                    <a href="logout.php" style="color: var(--color-danger);">
+                                        <i class="bi bi-box-arrow-right"></i>
+                                        <span>Sign Out</span>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <div class="account-dropdown-header">
+                                <h3>Welcome!</h3>
+                                <p>Sign in for the best experience</p>
+                            </div>
 
-                        <div class="account-dropdown-links">
-                            <a href="my-profile.php">
-                                <i class="bi bi-person-circle"></i>
-                                <span>My Profile</span>
-                            </a>
-                            <a href="help-center.php">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Help Center</span>
-                            </a>
-                        </div>
+                            <div class="account-dropdown-actions">
+                                <a href="login.php" class="account-signin">Sign In</a>
+                                <a href="register.php" class="account-register">Create Account</a>
+                            </div>
+
+                            <div class="account-dropdown-links">
+                                <a href="my-profile.php">
+                                    <i class="bi bi-person-circle"></i>
+                                    <span>My Profile</span>
+                                </a>
+                                <a href="help-center.php">
+                                    <i class="bi bi-question-circle"></i>
+                                    <span>Help Center</span>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
 

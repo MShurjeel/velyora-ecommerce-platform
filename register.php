@@ -1,5 +1,61 @@
 <?php
+require_once 'config/db.php';
 $pageTitle = "Create Account — Velyora";
+
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$error = '';
+$success = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $fullname = trim($_POST['fullname'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
+    $country = $_POST['country'] ?? '';
+    $terms = isset($_POST['terms']) ? 1 : 0;
+    $promotions = isset($_POST['promotions']) ? 1 : 0;
+
+    if (empty($fullname) || empty($email) || empty($password) || empty($country)) {
+        $error = "Please fill in all required fields.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Please enter a valid email address.";
+    } elseif ($password !== $confirm_password) {
+        $error = "Passwords do not match.";
+    } elseif (!$terms) {
+        $error = "You must agree to the Terms and Privacy Policy.";
+    } else {
+        // Check if email exists
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
+        $stmt->execute([':email' => $email]);
+        if ($stmt->fetch()) {
+            $error = "An account with this email already exists.";
+        } else {
+            // Insert user
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $pdo->prepare("INSERT INTO users (fullname, email, password_hash, country, promotions) VALUES (:fullname, :email, :password_hash, :country, :promotions)");
+            if ($stmt->execute([
+                ':fullname' => $fullname,
+                ':email' => $email,
+                ':password_hash' => $password_hash,
+                ':country' => $country,
+                ':promotions' => $promotions
+            ])) {
+                // Auto-login
+                $_SESSION['user_id'] = $pdo->lastInsertId();
+                $_SESSION['user_name'] = $fullname;
+                $_SESSION['user_email'] = $email;
+                header("Location: index.php");
+                exit;
+            } else {
+                $error = "An error occurred during registration. Please try again.";
+            }
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +128,13 @@ $pageTitle = "Create Account — Velyora";
                     <span>OR CONTINUE WITH EMAIL</span>
                 </div>
 
-                <form class="velyora-register-form" action="#" method="post">
+                <?php if ($error): ?>
+                    <div class="alert alert-danger" role="alert" style="font-size: 13px; border-radius: var(--radius-sm);">
+                        <?php echo htmlspecialchars($error); ?>
+                    </div>
+                <?php endif; ?>
+
+                <form class="velyora-register-form" action="register.php" method="post">
                     <div class="form-field">
                         <label>Full Name</label>
                         <div class="input-wrapper">
