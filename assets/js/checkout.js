@@ -159,22 +159,39 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
-            // Fake processing and success
             const origHtml = placeOrderBtn.innerHTML;
             placeOrderBtn.disabled = true;
             placeOrderBtn.innerHTML = '<span><span class="spinner-border spinner-border-sm"></span> Processing...</span>';
 
-            setTimeout(async () => {
-                // Clear cart backend before redirecting
-                try {
-                    const formData = new FormData();
-                    formData.append('action', 'clear');
-                    await fetch('ajax/cart.php', { method: 'POST', body: formData });
-                } catch(e) {}
-                
-                alert('Order placed successfully! Redirecting...');
-                window.location.href = 'index.php';
-            }, 1500);
+            const formData = new FormData();
+            formData.append('first_name', document.getElementById('first-name').value);
+            formData.append('last_name', document.getElementById('last-name').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('phone', document.getElementById('phone').value);
+            formData.append('address', document.getElementById('address').value);
+            formData.append('city', document.getElementById('city').value);
+            formData.append('payment_method', paymentMethod);
+
+            try {
+                const response = await fetch('ajax/checkout.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Order placed successfully! Redirecting...');
+                    window.location.href = 'my-profile.php#v-pills-orders';
+                } else {
+                    alert(result.message || 'Failed to place order.');
+                    placeOrderBtn.disabled = false;
+                    placeOrderBtn.innerHTML = origHtml;
+                }
+            } catch(e) {
+                alert('Network error. Please try again.');
+                placeOrderBtn.disabled = false;
+                placeOrderBtn.innerHTML = origHtml;
+            }
         });
     }
 });
