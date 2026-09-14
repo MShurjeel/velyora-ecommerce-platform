@@ -1,6 +1,19 @@
 <!-- =========================================================
      HEADER
 ========================================================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $pageTitle ?></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+</head>
+<body>
 <header class="trendy-header">
     <div class="header-left">
         <button class="icon-btn-flat d-mobile" id="mobileMenuBtn"><i class="bi bi-list"></i></button>

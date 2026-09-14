@@ -1,3 +1,4 @@
+<?php $userOrders = getUserOrders(); ?>
 <main class="account-content">
     <div class="content-header">
         <h3>My Orders</h3>
@@ -12,69 +13,53 @@
 
     <!-- Order List -->
     <div class="orders-list">
-
-        <!-- Order Card 1: Processing -->
-        <div class="order-card">
-            <div class="order-header">
-                <div class="order-id">Order ID: <strong>#ORD-2026-1278</strong></div>
-                <div class="order-date">Feb 20, 2026</div>
+        <?php if (empty($userOrders)): ?>
+            <div class="text-center py-5" style="color: var(--color-text-light); text-align:center;">
+                <i class="bi bi-box" style="font-size: 48px; color: var(--color-border); display: block; margin-bottom: 15px;"></i>
+                <h5>No orders found</h5>
+                <p>You haven't placed any orders yet.</p>
+                <a href="index.php" class="btn-primary" style="display: inline-block; margin-top: 15px;">Start Shopping</a>
             </div>
-            <div class="order-body">
-                <div class="order-images">
-                    <img src="<?php echo htmlspecialchars(getProductImage(1)); ?>" alt="Item 1">
-                    <img src="<?php echo htmlspecialchars(getProductImage(2)); ?>" alt="Item 2">
-                    <img src="<?php echo htmlspecialchars(getProductImage(3)); ?>" alt="Item 3">
-                </div>
-                <div class="order-summary">
-                    <div class="summary-row">
-                        <span>Status</span>
-                        <span class="status-badge processing">Processing</span>
+        <?php else: ?>
+            <?php foreach ($userOrders as $order): ?>
+                <div class="order-card">
+                    <div class="order-header">
+                        <div class="order-id">Order ID: <strong><?php echo htmlspecialchars($order['order_number']); ?></strong></div>
+                        <div class="order-date"><?php echo date('M d, Y', strtotime($order['created_at'])); ?></div>
                     </div>
-                    <div class="summary-row">
-                        <span>Items</span>
-                        <span>3 Items</span>
+                    <div class="order-body">
+                        <div class="order-images">
+                            <?php foreach ($order['items'] as $item): ?>
+                                <img src="<?php echo htmlspecialchars($item['image']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>" title="<?php echo htmlspecialchars($item['name']); ?>">
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="order-summary">
+                            <div class="summary-row">
+                                <span>Status</span>
+                                <?php 
+                                $statusClass = strtolower($order['order_status']); 
+                                if ($statusClass === 'processing') $statusClass = 'processing';
+                                elseif ($statusClass === 'delivered') $statusClass = 'delivered';
+                                else $statusClass = 'pending';
+                                ?>
+                                <span class="status-badge <?php echo $statusClass; ?>"><?php echo htmlspecialchars($order['order_status']); ?></span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Items</span>
+                                <span><?php echo count($order['items']); ?> Items</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <strong>Rs. <?php echo number_format($order['total_amount']); ?></strong>
+                            </div>
+                        </div>
                     </div>
-                    <div class="summary-row total">
-                        <span>Total</span>
-                        <strong>$789.99</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="order-actions">
-                <button class="btn-primary">Track Order</button>
-                <button class="btn-secondary">View Details</button>
-            </div>
-        </div>
-
-        <!-- Order Card 2: Delivered -->
-        <div class="order-card">
-            <div class="order-header">
-                <div class="order-id">Order ID: <strong>#ORD-2026-1252</strong></div>
-                <div class="order-date">Feb 10, 2026</div>
-            </div>
-            <div class="order-body">
-                <div class="order-images">
-                    <img src="<?php echo htmlspecialchars(getProductImage(4)); ?>" alt="Item 4">
-                </div>
-                <div class="order-summary">
-                    <div class="summary-row">
-                        <span>Status</span>
-                        <span class="status-badge delivered">Delivered</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Items</span>
-                        <span>1 Item</span>
-                    </div>
-                    <div class="summary-row total">
-                        <span>Total</span>
-                        <strong>Rs. 4,999</strong>
+                    <div class="order-actions">
+                        <button class="btn-primary">Track Order</button>
+                        <button class="btn-secondary">View Details</button>
                     </div>
                 </div>
-            </div>
-            <div class="order-actions">
-                <button class="btn-outline-success">Write Review</button>
-                <button class="btn-secondary">View Details</button>
-            </div>
-        </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </main>

@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/product.css">
     <link rel="stylesheet" href="assets/css/products.css">
+    <link rel="stylesheet" href="assets/css/checkout.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
@@ -76,7 +79,7 @@
                                     <i class="bi bi-person-circle"></i>
                                     <span>My Profile</span>
                                 </a>
-                                <a href="orders.php">
+                                <a href="my-profile.php">
                                     <i class="bi bi-box-seam"></i>
                                     <span>My Orders</span>
                                 </a>

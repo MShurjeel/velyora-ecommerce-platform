@@ -1,21 +1,6 @@
 <?php
 $pageTitle = "Contact Us — Velyora";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($pageTitle); ?></title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/contact.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-</head>
-<body>
-
 <?php include 'includes/header.php'; ?>
 
 <main>
@@ -205,62 +190,8 @@ $pageTitle = "Contact Us — Velyora";
         </div>
     </section>
 
-    <!-- =========================================================
-         MAIN SECTION 2: MAP & TRUST FEATURES (MERGED)
-    ========================================================= -->
-    <section class="contact-location" style="padding-top: 0;">
-        <div class="container">
-
-            <div class="contact-location-card">
-
-                <!-- Left: Trust Features (Replaces redundant address text) -->
-                <div class="contact-location-content">
-
-                    <span class="contact-eyebrow">WHY VELYORA</span>
-
-                    <h2>Support You Can Count On.</h2>
-
-                    <p>
-                        From your first question to your final delivery,
-                        we're committed to making your experience simple and secure.
-                    </p>
-
-                    <!-- Reusing location-details CSS to beautifully format the 3 features -->
-                    <div class="contact-location-details" style="margin-top: 20px;">
-
-                        <div>
-                            <i class="bi bi-lightning-charge"></i>
-                            <span>
-                                <strong style="display:block; color:var(--color-heading); font-size:13px; margin-bottom:2px;">Quick Response</strong>
-                                Our team aims to respond within one business day.
-                            </span>
-                        </div>
-
-                        <div>
-                            <i class="bi bi-headset"></i>
-                            <span>
-                                <strong style="display:block; color:var(--color-heading); font-size:13px; margin-bottom:2px;">Personal Support</strong>
-                                Get helpful answers from a real team member.
-                            </span>
-                        </div>
-
-                        <div>
-                            <i class="bi bi-shield-check"></i>
-                            <span>
-                                <strong style="display:block; color:var(--color-heading); font-size:13px; margin-bottom:2px;">Secure & Private</strong>
-                                Your contact information is handled securely.
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <a href="#" class="contact-directions">
-                        Get Directions to our Store
-                        <i class="bi bi-arrow-up-right"></i>
-                    </a>
-
-                </div>
-
+    <section class="container-fluid contact-location" style="padding-top: 0;" >
+       
                 <!-- Right: The Map -->
                 <div class="contact-map">
                     <div class="contact-map-placeholder">
@@ -282,11 +213,10 @@ $pageTitle = "Contact Us — Velyora";
             </div>
 
         </div>
+      
     </section>
-
+    <?php include 'includes/footer.php'; ?>
 </main>
-
-<?php include 'includes/footer.php'; ?>
 
 </body>
 </html>

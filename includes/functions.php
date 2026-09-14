@@ -1094,4 +1094,32 @@ if (!function_exists('addAllWishlistToCart')) {
     }
 }
 
-
+if (!function_exists('getUserOrders')) {
+    function getUserOrders() {
+        global $pdo;
+        if (!isset($_SESSION['user_id'])) return [];
+        
+        $userId = $_SESSION['user_id'];
+        
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM orders WHERE user_id = :user_id ORDER BY created_at DESC");
+            $stmt->execute([':user_id' => $userId]);
+            $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            foreach ($orders as &$order) {
+                $itemStmt = $pdo->prepare("SELECT oi.*, p.name, p.image FROM order_items oi JOIN products p ON oi.product_id = p.id WHERE oi.order_id = :order_id");
+                $itemStmt->execute([':order_id' => $order['id']]);
+                $items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
+                
+                foreach ($items as &$item) {
+                    $item['image'] = getProductImage($item['product_id'], $item['image']);
+                }
+                $order['items'] = $items;
+            }
+            return $orders;
+        } catch (Exception $e) {
+            error_log('getUserOrders error: ' . $e->getMessage());
+            return [];
+        }
+    }
+}
