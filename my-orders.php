@@ -3,14 +3,20 @@
 $userOrders = function_exists('getUserOrders') ? getUserOrders() : [];
 $orderCount = count($userOrders);
 
-// Status badge config: [bg-color, text-color, icon]
+// Status badge config — driven by DB value. Any status admin sets is reflected here.
+// Format: [bg-color, text-color, bootstrap-icon]
 $statusConfig = [
+    'Pending'    => ['bg' => '#F3F4F6', 'color' => '#6B7280', 'icon' => 'bi-hourglass-split'],
     'Processing' => ['bg' => '#FEF3C7', 'color' => '#D97706', 'icon' => 'bi-clock-history'],
     'Shipped'    => ['bg' => '#DBEAFE', 'color' => '#2563EB', 'icon' => 'bi-truck'],
     'Delivered'  => ['bg' => '#DCFCE7', 'color' => '#16A34A', 'icon' => 'bi-check-circle'],
     'Cancelled'  => ['bg' => '#FEE2E2', 'color' => '#DC2626', 'icon' => 'bi-x-circle'],
-    'Pending'    => ['bg' => '#F3F4F6', 'color' => '#6B7280', 'icon' => 'bi-hourglass-split'],
+    'Refunded'   => ['bg' => '#F3E8FF', 'color' => '#7C3AED', 'icon' => 'bi-arrow-counterclockwise'],
+    'On Hold'    => ['bg' => '#FEF3C7', 'color' => '#92400E', 'icon' => 'bi-pause-circle'],
 ];
+// Safe fallback for any unknown status an admin might set
+$defaultStatus = ['bg' => '#F1F5F9', 'color' => '#475569', 'icon' => 'bi-info-circle'];
+
 ?>
 
 <main class="account-content orders-tab">
@@ -65,7 +71,7 @@ $statusConfig = [
 
             <?php foreach ($userOrders as $order):
                 $status = $order['order_status'] ?? 'Pending';
-                $cfg    = $statusConfig[$status] ?? $statusConfig['Pending'];
+                $cfg    = $statusConfig[$status] ?? $defaultStatus;
                 $items  = $order['items'] ?? [];
                 $itemCount = count($items);
                 // Show max 3 thumbnails, then a "+N" overflow chip
