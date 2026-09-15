@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- 3. Place Order ---
     const placeOrderBtn = document.querySelector('.place-order-button');
     if (placeOrderBtn) {
-        placeOrderBtn.addEventListener('click', function () {
+        placeOrderBtn.addEventListener('click', async function () {
             // Validate Terms
             const terms = document.querySelector('.terms-checkbox input[type="checkbox"]');
             if (terms && !terms.checked) {
