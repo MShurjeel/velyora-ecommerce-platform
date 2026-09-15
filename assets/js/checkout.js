@@ -159,22 +159,43 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
-            // Fake processing and success
+            // Real order placement — send data to backend
             const origHtml = placeOrderBtn.innerHTML;
             placeOrderBtn.disabled = true;
-            placeOrderBtn.innerHTML = '<span><span class="spinner-border spinner-border-sm"></span> Processing...</span>';
+            placeOrderBtn.innerHTML = '<span><span class="spinner-border spinner-border-sm"></span> Placing Order...</span>';
 
-            setTimeout(async () => {
-                // Clear cart backend before redirecting
-                try {
-                    const formData = new FormData();
-                    formData.append('action', 'clear');
-                    await fetch('ajax/cart.php', { method: 'POST', body: formData });
-                } catch(e) {}
-                
-                alert('Order placed successfully! Redirecting...');
-                window.location.href = 'index.php';
-            }, 1500);
+            const formData = new FormData();
+            formData.append('first_name',     document.getElementById('first-name')?.value  || '');
+            formData.append('last_name',      document.getElementById('last-name')?.value   || '');
+            formData.append('email',          document.getElementById('email')?.value        || '');
+            formData.append('phone',          document.getElementById('phone')?.value        || '');
+            formData.append('address',        document.getElementById('address')?.value      || '');
+            formData.append('address_2',      document.getElementById('address-2')?.value   || '');
+            formData.append('city',           document.getElementById('city')?.value         || '');
+            formData.append('postal_code',    document.getElementById('postal-code')?.value  || '');
+            formData.append('payment_method', paymentMethod);
+
+            try {
+                const res    = await fetch('ajax/checkout.php', { method: 'POST', body: formData });
+                const result = await res.json();
+
+                if (result.success) {
+                    placeOrderBtn.innerHTML = '<span><i class="bi bi-check-circle"></i> Order Placed!</span>';
+                    setTimeout(() => {
+                        window.location.href = 'my-profile.php#v-pills-orders';
+                    }, 800);
+                } else if (result.requires_login) {
+                    window.location.href = 'login.php';
+                } else {
+                    alert(result.message || 'Failed to place order. Please try again.');
+                    placeOrderBtn.disabled = false;
+                    placeOrderBtn.innerHTML = origHtml;
+                }
+            } catch (e) {
+                alert('Network error. Please check your connection and try again.');
+                placeOrderBtn.disabled = false;
+                placeOrderBtn.innerHTML = origHtml;
+            }
         });
     }
 });

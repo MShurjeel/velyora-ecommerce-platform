@@ -411,3 +411,4 @@ $statusConfig = [
     searchInput?.addEventListener('input', applyFilters);
 })();
 </script>
+
