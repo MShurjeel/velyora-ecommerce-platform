@@ -135,4 +135,3 @@ try {
     error_log('Checkout error: ' . $e->getMessage());
     echo json_encode(['success' => false, 'message' => 'Failed to place order. Please try again.']);
 }
-

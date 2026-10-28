@@ -1,0 +1,64 @@
+/* =========================================================
+   ADMIN PANEL RESPONSIVENESS
+========================================================= */
+
+/* 1200px — Small Laptops / Large Tablets */
+@media (max-width: 1200px) {
+    .charts-row, .bottom-row { grid-template-columns: 1fr; }
+    .widgets-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* 992px — Tablets */
+@media (max-width: 992px) {
+    .stats-four-grid { grid-template-columns: repeat(2, 1fr); }
+    .widgets-row { grid-template-columns: 1fr; }
+    
+    .trendy-sidebar {
+        position: fixed;
+        height: 100vh;
+        z-index: 999;
+        transform: translateX(-100%);
+        box-shadow: 5px 0 25px rgba(0,0,0,0.1);
+    }
+    .trendy-sidebar.show { transform: translateX(0); }
+    .mobile-close-btn { display: block; }
+    .trendy-main { margin-left: 0; }
+    
+    .hero-banner-card { flex-direction: column; align-items: flex-start; gap: 25px; padding: 30px; }
+    .hero-banner-card::before, .hero-banner-card::after { display: none; }
+    .hero-right { width: 100%; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+    .hero-right::-webkit-scrollbar { display: none; }
+    
+    .search-bar-pill { width: 220px; }
+    .d-desktop { display: none; }
+    .d-mobile { display: grid; }
+}
+
+/* 768px — Mobile Phones */
+@media (max-width: 768px) {
+    .trendy-header { padding: 0 15px; }
+    .header-left .search-bar-pill { display: none; }
+    .trendy-content { padding: 20px 15px; }
+    .hero-banner-card { padding: 25px 20px; }
+    .hero-left h1 { font-size: 26px; }
+    .hero-left p { font-size: 13px; margin-bottom: 15px; }
+    .stat-card, .card { padding: 20px; }
+    .table-card .card-header { padding: 20px 20px 0; }
+    .table-responsive { padding: 15px 20px; }
+}
+
+/* 480px — Small Mobile Phones */
+@media (max-width: 480px) {
+    .stats-four-grid { grid-template-columns: 1fr; }
+    .hero-translucent-box { min-width: 130px; padding: 12px 15px; }
+    .box-text strong { font-size: 18px; }
+    .btn-hero-white { width: 100%; justify-content: center; }
+    
+    .header-profile span { display: none; }
+    .btn-create-pill { padding: 0 12px; justify-content: center; }
+    .btn-create-pill span { display: none; }
+    .btn-create-pill i { font-size: 14px; margin: 0; }
+    
+    .header-right, .header-left { gap: 10px; }
+    .icon-btn-flat { width: 32px; height: 32px; font-size: 16px; }
+}
