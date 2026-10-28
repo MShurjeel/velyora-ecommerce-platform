@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatbotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,3 +87,7 @@ Route::post('/ajax/wishlist.php', [WishlistController::class, 'handleAjax']);
 
 Route::post('/ajax/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout.store');
 Route::post('/ajax/checkout.php', [CheckoutController::class, 'processCheckout']);
+
+// --- Chatbot Endpoint ---
+
+Route::post('/chatbot/message', [ChatbotController::class, 'chat']);
